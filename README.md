@@ -12,8 +12,8 @@ https://docs.google.com/document/d/17fSaiGtqa_60uI0C1pmnPi8ZPySKEmGfH2iAWPpEl_c/
 
 * Installer si ce n'est pas fait, `mysql` en version `5.7.x` ;
 * Installer sur le poste de dévleoppement si ce n'est pas fait, `PHP` en version `7.4.x`
-* Configurer le fichier `"/.env"` selon l'installation présente sur le poste de développement:
-  * Utiliser le fichier ".env.example" pour créer le fichier ".env" avec le même contenu et modifier la variable `DATABASE_URL`
+* Création et configuration du fichier `"/.env.local"` selon l'installation présente sur le poste de développement:
+  * Utiliser le fichier "`.env`" pour créer le fichier "`.env.local`" avec le même contenu et modifier la variable `DATABASE_URL`
   * Modifier le contenu de la variable `DATABASE_URL` :
     * `DATABASE_URL="mysql://user:passwd@127.0.0.1:3306/l33tboards?serverVersion=5.7"`
     * `user` = nom d'utilisateur de connexion au serveur de base de données MYSQL (ex: `root` avec WAMP)
