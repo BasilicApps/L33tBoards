@@ -21,6 +21,10 @@ https://docs.google.com/document/d/17fSaiGtqa_60uI0C1pmnPi8ZPySKEmGfH2iAWPpEl_c/
     * `127.0.0.1` = à laisser pour le dév. en localhost
     * `3306` = port du serveur laragon, wamp etc. (windows = `3306`)
 * Se rendre dans un nouveau terminal dans le répertoire correspondant à la racine du projet (là où se trouve les dossiers & fichiers générés par symfony) ;
+* Migrez la database pour la formater et lui faire adopter le modéle de donnée:
+* `php bin/console doctrine:migrations:migrate`
+* Appliquer les fixtures pour la remplir avec des données placeholder:
+* `php bin/console doctrine:fixtures:load`
 * Lancer l'installation sur le poste de développement des dépendances composer:
   * `composer install`
 * Lancer le serveur (Laragon / WAMP / XAMP) pour le support PHP & MYSQL ;
