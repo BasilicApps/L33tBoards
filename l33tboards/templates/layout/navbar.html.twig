@@ -10,7 +10,7 @@
                 <div class="input-group-prepend">
                     <button id="button-addon2" type="submit" class="btn btn-link text-warning"><i class="fa fa-search"></i></button>
                 </div>
-                <input type="search" placeholder="Rechercher..." aria-describedby="button-addon2" class="form-control form-search-box border-0 bg-light">
+                <input type="search" placeholder="Search..." aria-describedby="button-addon2" class="form-control form-search-box border-0 bg-light">
             </div>
         </div>
     </div>
@@ -22,16 +22,16 @@
                     <span class="sr-only">Toggle Dropdown</span>
                 </button>
                 <div class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" href="#">Mon profil</a>
-                    <a class="dropdown-item" href="#">Mon compte</a>
+                    <a class="dropdown-item" href="#">My Profile</a>
+                    <a class="dropdown-item" href="#">Account settings</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="{{ url('app_logout') }}">Se déconnecter</a>
+                    <a class="dropdown-item" href="{{ url('app_logout') }}">Logout</a>
                 </div>
             </div>
             <a href="{{ url('app_logout') }}" class="btn btn-danger"><i class="fa fa-power-off"></i></a>
         {% else %}
-            <a href="{{ url('app_login') }}" class="btn btn-outline-primary">Connexion</a>
-            <a href="{{ url('app_register') }}" class="btn btn-primary">Créer un compte</a>
+            <a href="{{ url('app_login') }}" class="btn btn-outline-primary">Login</a>
+            <a href="{{ url('app_register') }}" class="btn btn-primary">Register</a>
         {% endif %}
     </div>
 </nav>
