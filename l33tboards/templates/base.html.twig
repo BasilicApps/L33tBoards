@@ -7,11 +7,13 @@
         {% block stylesheets %}
             <!-- Bootstrap CSS -->
             <link rel="stylesheet" href="{{ asset('/css/bootstrap.min.css') }}">
+            <link rel="stylesheet" href="{{ asset('/css/bootstrap-custom.css') }}">
         {% endblock %}
         <link rel="shortcut icon" href="{{ asset('/img/favicon.ico') }}" />
         <title>{% block title %}Hello, world!{% endblock %}</title>
     </head>
     <body>
+        {% include 'layout/navbar.html.twig' %}
         {% block body %}
             <h1>Hello, world!</h1>
         {% endblock %}
@@ -20,5 +22,6 @@
             <script src="{{ asset('/js/popper.min.js') }}"></script>
             <script src="{{ asset('/js/bootstrap.min.js') }}"></script>
         {% endblock %}
+        {% include 'layout/footer.html.twig' %}
     </body>
 </html>
