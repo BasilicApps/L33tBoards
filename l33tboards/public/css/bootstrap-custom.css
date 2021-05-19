@@ -57,3 +57,9 @@ li.timeline-item::before {
     z-index: 400;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
+
+/* Main Search Box */
+.form-search-box {
+    border-top-right-radius: 50rem!important;
+    border-bottom-right-radius: 50rem!important;
+}
