@@ -19,6 +19,15 @@ class BoardRepository extends ServiceEntityRepository
         parent::__construct($registry, Board::class);
     }
 
+    public function findLast($count)
+    {
+        return $this->createQueryBuilder('board')
+            ->setMaxResults($count)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
     // /**
     //  * @return Board[] Returns an array of Board objects
     //  */

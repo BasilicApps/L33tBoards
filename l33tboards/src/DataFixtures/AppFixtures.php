@@ -25,7 +25,7 @@ class AppFixtures extends Fixture
 
             $manager->persist($user);
 
-            for ($i = 0; $i < 2; $i++) { //boards
+            for ($u = 0; $u < 3; $u++) { //boards
                 $board = new Board();
                 $board->setTitle($faker->word());
                 $board->setVisibility(true);
@@ -35,7 +35,7 @@ class AppFixtures extends Fixture
                 $manager->persist($board);
             
                 
-                for ($i = 0; $i < 3; $i++) { //posts
+                for ($b = 0; $b < 3; $b++) { //posts
                     $post = new Post();
                     $post->setTitle($faker->sentence());
                     $post->setContent($faker->paragraph());
@@ -46,13 +46,7 @@ class AppFixtures extends Fixture
                     $manager->persist($post);
                 }
             }
-
         }
-
-
-
-
-
         $manager->flush();
     }
 }
