@@ -1,20 +1,94 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Mon Feed - L33TBOARDS{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'D:/wamp64/www/SYMFONY_LE4/projet-symfony/L33tBoards/l33tboards/src/Controller/HomeController.php'|file_link(0) }}">src/Controller/HomeController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'D:/wamp64/www/SYMFONY_LE4/projet-symfony/L33tBoards/l33tboards/templates/home/index.html.twig'|file_link(0) }}">templates/home/index.html.twig</a></code></li>
-    </ul>
+<div class="container">
+    <div class="row mt-4">
+        <div class="col-8">
+            <!-- Left part: FEED -->
+            <!--<div class="row">
+                <div class="col-lg-7 mx-auto">-->
+                    <!-- Top Trend Cards -->
+                    <hr data-content="TOP TRENDINGS" class="hr-text">
+                    <div class="my-4">
+                        <div class="card bg-dark d-inline-flex text-white trend-card mr-3">
+                            <img src="https://via.placeholder.com/229x160/222222/222222/?text=1" class="card-img" alt="...">
+                            <div class="card-img-overlay d-flex align-content-end flex-wrap">
+                                <h5 class="card-title trend-card-title m-0">Trend #1</h5>
+                                <p class="card-text trend-card-subtitle m-0">Description of trend #1 here.</p>
+                                <p class="card-text trend-card-text">username#1652 and others</p>
+                            </div>
+                        </div>
+                        <div class="card bg-dark d-inline-flex text-white trend-card mr-3">
+                            <img src="https://via.placeholder.com/229x160/222222/222222/?text=2" class="card-img" alt="...">
+                            <div class="card-img-overlay d-flex align-content-end flex-wrap">
+                                <h5 class="card-title trend-card-title m-0">Trend #2</h5>
+                                <p class="card-text trend-card-subtitle m-0">Description of trend #2 here.</p>
+                                <p class="card-text trend-card-text">username#6184 and others</p>
+                            </div>
+                        </div>
+                        <div class="card bg-dark d-inline-flex text-white trend-card">
+                            <img src="https://via.placeholder.com/229x160/222222/222222/?text=3" class="card-img" alt="...">
+                            <div class="card-img-overlay d-flex align-content-end flex-wrap">
+                                <h5 class="card-title trend-card-title m-0">Trend #3</h5>
+                                <p class="card-text trend-card-subtitle m-0">Description of trend #3 here.</p>
+                                <p class="card-text trend-card-text">username#8945 and others</p>
+                            </div>
+                        </div>
+                    </div><br>
+                    <!-- Timeline -->
+                    <hr data-content="YOUR TIMELINE FEED" class="hr-text">
+                    <div class="card">
+                        <div class="card-body p-2">
+                            <a href="#" class="btn btn-outline-danger px-4"><i class="fa fa-fire mr-2"></i>Hot</a>
+                            <a href="#" class="btn btn-outline-primary px-4"><i class="fa fa-chart-bar mr-2"></i>Top</a>
+                            <a href="#" class="btn btn-outline-warning px-4"><i class="fa fa-certificate mr-2"></i>New</a>
+                        </div>
+                    </div>
+                    <ul class="timeline">
+                        <li class="timeline-item bg-white rounded ml-3 p-4 shadow">
+                            <div class="timeline-arrow"></div>
+                            <h2 class="post-title mb-0">
+                                <img src="{{ asset('/img/default/board_default_24.png') }}" class="rounded-circle shadow mr-2" alt="...">
+                                <span><a href="#" class="text-dark">Board#1987</a></span>
+                                <span class="ml-3">|</span>
+                                <span class="mx-2">posted <span class="post-title-highlight">10 hours ago</span> by</span>
+                                <img src="{{ asset('/img/default/user_default_24.png') }}" class="rounded-circle shadow mr-2" alt="...">
+                                <span><a href="#" class="text-dark">Username#2379</a></span>
+                            </h2>
+                            <div class="post-content">
+                                <h2 class="h6 my-4 post-content-title">Les créneaux libres sont vraiment pris d'assaut par n'importe qui !</h2>
+                                <div class="text-center">
+                                    <img class="post-content-img img-thumbnail" src="https://preview.redd.it/dgk7vsf3q1071.png?width=640&height=1137&crop=smart&auto=webp&s=f9a809052b8d8764a62b574ddac2b326639d5786">
+                                </div>
+                            </div>
+                        </li>
+                        <li class="timeline-item bg-white rounded ml-3 p-4 shadow">
+                            <div class="timeline-arrow"></div>
+                            <h2 class="post-title mb-0">
+                                <img src="{{ asset('/img/default/board_default_24.png') }}" class="rounded-circle shadow mr-2" alt="...">
+                                <span><a href="#" class="text-dark">Board#6331</a></span>
+                                <span class="ml-3">|</span>
+                                <span class="mx-2">posted <span class="post-title-highlight">2 weeks ago</span> by</span>
+                                <img src="{{ asset('/img/default/user_default_24.png') }}" class="rounded-circle shadow mr-2" alt="...">
+                                <span><a href="#" class="text-dark">Username#2379</a></span>
+                            </h2>
+                            <div class="post-content">
+                                <h2 class="h6 my-4 post-content-title">C'est donc ça la vie d'avant !</h2>
+                                <div class="text-center">
+                                    <img class="post-content-img img-thumbnail" src="https://preview.redd.it/su3j9a6g13071.jpg?width=640&height=364&crop=smart&auto=webp&s=6ab1f8c72e0fd1d755f79b7d725de781833de9d7">
+                                </div>
+                            </div>
+                        </li>
+                    </ul><!-- End -->
+                <!--</div>
+            </div>-->
+        </div>
+        <div class="col-4" style="margin-top:20px">
+            <!-- Right part: TOP + infos + footer -->
+            {% include 'layout/footer.html.twig' %}
+        </div>
+    </div>
 </div>
 {% endblock %}
