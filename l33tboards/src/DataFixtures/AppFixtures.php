@@ -5,6 +5,8 @@ namespace App\DataFixtures;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use App\Entity\User;
+use App\Entity\Post;
+use App\Entity\Board;
 use Faker;
 
 class AppFixtures extends Fixture
@@ -16,13 +18,40 @@ class AppFixtures extends Fixture
 
         $faker = Faker\Factory::create();
 
-        for ($i = 0; $i < 3; $i++) {
+        for ($i = 0; $i < 3; $i++) { //users
             $user = new User();
             $user->setUsername($faker->firstName());
-            $user->setPassword($faker->stateAbbr()); //note that this is the hashed password so what is it doesn't really matter 
+            $user->setPassword($faker->stateAbbr()); //note that this is the hashed password so what is it doesn't really matter, you wont be able to log anyway
 
             $manager->persist($user);
+
+            for ($i = 0; $i < 2; $i++) { //boards
+                $board = new Board();
+                $board->setTitle($faker->word());
+                $board->setVisibility(true);
+                $board->setScore(0);
+                $board->addOwner($user);
+
+                $manager->persist($board);
+            
+                
+                for ($i = 0; $i < 3; $i++) { //posts
+                    $post = new Post();
+                    $post->setTitle($faker->sentence());
+                    $post->setContent($faker->paragraph());
+                    $post->setScore(0);
+                    $post->setAuthor($user);
+                    $post->setBoard($board);
+
+                    $manager->persist($post);
+                }
+            }
+
         }
+
+
+
+
 
         $manager->flush();
     }
