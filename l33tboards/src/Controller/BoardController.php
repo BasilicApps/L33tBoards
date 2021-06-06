@@ -33,4 +33,14 @@ class BoardController extends AbstractController
             'boards' => $this->boards
         ]);
     }
+
+    /**
+     * @Route("/boards/{urlTitle}", name="showBoard", methods={"GET"})
+     */
+    public function show(Board $board): Response
+    {
+        return $this->render('board/show.html.twig', [
+            'board' => $board
+        ]);
+    }
 }

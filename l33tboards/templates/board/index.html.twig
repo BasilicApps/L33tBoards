@@ -8,7 +8,7 @@
     <div class="row mt-4">
     {% for board in boards %}
         <div class="col-8">
-        <a href="#">  <!-- TODO, je pue la chiasse en front-->
+        <a href="{{ url("showBoard", {'urlTitle': board.urlTitle}) }}">  <!-- TODO, je pue la chiasse en front-->
             <li class="timeline-item bg-white rounded ml-3 p-4 shadow">
                 <div class="timeline-arrow"></div>
                     <h2 class="post-title mb-0">

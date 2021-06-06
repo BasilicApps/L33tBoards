@@ -44,6 +44,11 @@ class Board
      */
     private $posts;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $urlTitle;
+
     public function __construct()
     {
         $this->owner = new ArrayCollection();
@@ -141,6 +146,21 @@ class Board
                 $post->setBoard(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUrlTitle(): ?string
+    {
+        return $this->urlTitle;
+    }
+
+    public function setUrlTitle(string $urlTitle): self
+    {
+        // On vire tous les espaces
+        $urlTitle = preg_replace("/\s+/", "", $urlTitle);
+
+        $this->urlTitle = $urlTitle;
 
         return $this;
     }

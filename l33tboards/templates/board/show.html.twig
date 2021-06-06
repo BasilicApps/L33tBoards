@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{board.title}}{% endblock %}
+
+{% block body %}
+
+<div class="card board-header">
+    <div class="row mt-4 board-header-content">
+        <div class="col-2">
+            <img src="{{ asset('/img/default/board_default_24.png') }}" class="rounded-circle shadow mr-2 board-image" alt="...">
+        </div>
+        <div class="col-10">
+            <h1>Welcome to {{board.title}}!</h1>
+            <h2>/boards/{{board.urlTitle}}</h2>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <!-- Timeline -->
+    <hr data-content="BOARD TIMELINE FEED" class="hr-text">
+    <div class="card">
+        <div class="card-body p-2">
+            <a href="#" class="btn btn-outline-danger px-4"><i class="fa fa-fire mr-2"></i>Hot</a>
+            <a href="#" class="btn btn-outline-primary px-4"><i class="fa fa-chart-bar mr-2"></i>Top</a>
+            <a href="#" class="btn btn-outline-warning px-4"><i class="fa fa-certificate mr-2"></i>New</a>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <ul class="timeline">
+            {% for post in board.posts %} <!-- ça sera à changer, pour l'instant ça va car on a que quelque posts -->
+            <li class="timeline-item bg-white rounded ml-3 p-4 shadow">
+                <div class="timeline-arrow"></div>
+                    <h2 class="post-title mb-0">
+                        <span class="mx-2">posted <span class="post-title-highlight">10 hours ago</span> by</span>
+                        <img src="{{ asset('/img/default/user_default_24.png') }}" class="rounded-circle shadow mr-2" alt="...">
+                        <span><a href="#" class="text-dark">{{post.author.username}}</a></span>
+                    </h2>
+                <div class="post-content">
+                    <h2 class="h6 my-4 post-content-title">{{post.title}}</h2>
+                    <div class="text-center">
+                        {{post.content}}
+                    </div>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+{% endblock %}
