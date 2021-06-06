@@ -27,7 +27,8 @@ class AppFixtures extends Fixture
 
             for ($u = 0; $u < 3; $u++) { //boards
                 $board = new Board();
-                $board->setTitle($faker->word());
+                $board->setTitle($faker->sentence(3));
+                $board->setUrlTitle($board->getTitle());
                 $board->setVisibility(true);
                 $board->setScore(0);
                 $board->addOwner($user);
