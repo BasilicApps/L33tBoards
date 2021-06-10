@@ -35,6 +35,21 @@ class BoardController extends AbstractController
     }
 
     /**
+     * @Route("/toggleFollow/{urlTitle}", name="toggleFollow", methods={"GET"})
+     */
+
+    public function toggleFollow(string $urlTitle): Response
+    {
+        $board = $this->boardRepository->findByUrl($urlTitle)[0];
+        dump($board);
+        $this->getUser()->addFollowedBoard($board);
+        return $this->render('board/show.html.twig', [
+            'board' => $board
+        ]);
+    }
+
+
+    /**
      * @Route("/boards/{urlTitle}", name="showBoard", methods={"GET"})
      */
     public function show(string $urlTitle): Response

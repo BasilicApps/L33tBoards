@@ -14,6 +14,11 @@
                     <h2 class="post-title mb-0">
                         <h1><spanclass="text-dark">{{board.title}}</span></h1>
                         <span class="ml-3">Dankness : {{board.score}}</span>
+                        {% if app.user != null %} 
+                            <a href="{{url("toggleFollow", {'urlTitle': board.urlTitle}) }}">
+                                <button type="button" class="btn btn-primary">follow</button> <!-- Je suis toujours nul en front btw -->
+                            </a>
+                        {% endif %}
                     </h2>
                 </div>
             </li>
