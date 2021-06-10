@@ -44,6 +44,11 @@ class Post
      */
     private $board;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $createdAt;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -105,6 +110,18 @@ class Post
     public function setBoard(?Board $board): self
     {
         $this->board = $board;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
 
         return $this;
     }

@@ -43,6 +43,7 @@ class AppFixtures extends Fixture
                     $post->setScore(0);
                     $post->setAuthor($user);
                     $post->setBoard($board);
+                    $post->setCreatedAt($faker->dateTime());
 
                     $manager->persist($post);
                 }
