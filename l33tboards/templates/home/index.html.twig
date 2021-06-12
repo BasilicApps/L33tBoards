@@ -47,40 +47,24 @@
                         </div>
                     </div>
                     <ul class="timeline">
-                        <li class="timeline-item bg-white rounded ml-3 p-4 shadow">
-                            <div class="timeline-arrow"></div>
-                            <h2 class="post-title mb-0">
-                                <img src="{{ asset('/img/default/board_default_24.png') }}" class="rounded-circle shadow mr-2" alt="...">
-                                <span><a href="#" class="text-dark">Board#1987</a></span>
-                                <span class="ml-3">|</span>
-                                <span class="mx-2">posted <span class="post-title-highlight">10 hours ago</span> by</span>
-                                <img src="{{ asset('/img/default/user_default_24.png') }}" class="rounded-circle shadow mr-2" alt="...">
-                                <span><a href="#" class="text-dark">Username#2379</a></span>
-                            </h2>
-                            <div class="post-content">
-                                <h2 class="h6 my-4 post-content-title">Les créneaux libres sont vraiment pris d'assaut par n'importe qui !</h2>
-                                <div class="text-center">
-                                    <img class="post-content-img img-thumbnail" src="https://preview.redd.it/dgk7vsf3q1071.png?width=640&height=1137&crop=smart&auto=webp&s=f9a809052b8d8764a62b574ddac2b326639d5786">
+                        {% for board in boards %} <!-- ça sera à changer, pour l'instant ça va car on a que quelque posts -->
+                            {% for post in board.posts %}
+                            <li class="timeline-item bg-white rounded ml-3 p-4 shadow">
+                                <div class="timeline-arrow"></div>
+                                    <h2 class="post-title mb-0">
+                                        <span class="mx-2">posted <span class="post-title-highlight">{{post.createdAt |date}}</span> by</span>
+                                        <img src="{{ asset('/img/default/user_default_24.png') }}" class="rounded-circle shadow mr-2" alt="...">
+                                        <span><a href="/u/{{post.author.username}}" class="text-dark">{{post.author.username}}</a></span>
+                                    </h2>
+                                <div class="post-content">
+                                    <h2 class="h6 my-4 post-content-title">{{post.title}}</h2>
+                                    <div class="text-center">
+                                        {{post.content}}
+                                    </div>
                                 </div>
-                            </div>
-                        </li>
-                        <li class="timeline-item bg-white rounded ml-3 p-4 shadow">
-                            <div class="timeline-arrow"></div>
-                            <h2 class="post-title mb-0">
-                                <img src="{{ asset('/img/default/board_default_24.png') }}" class="rounded-circle shadow mr-2" alt="...">
-                                <span><a href="#" class="text-dark">Board#6331</a></span>
-                                <span class="ml-3">|</span>
-                                <span class="mx-2">posted <span class="post-title-highlight">2 weeks ago</span> by</span>
-                                <img src="{{ asset('/img/default/user_default_24.png') }}" class="rounded-circle shadow mr-2" alt="...">
-                                <span><a href="#" class="text-dark">Username#2379</a></span>
-                            </h2>
-                            <div class="post-content">
-                                <h2 class="h6 my-4 post-content-title">C'est donc ça la vie d'avant !</h2>
-                                <div class="text-center">
-                                    <img class="post-content-img img-thumbnail" src="https://preview.redd.it/su3j9a6g13071.jpg?width=640&height=364&crop=smart&auto=webp&s=6ab1f8c72e0fd1d755f79b7d725de781833de9d7">
-                                </div>
-                            </div>
-                        </li>
+                            </li>
+                            {% endfor %}
+                        {% endfor %}
                     </ul><!-- End -->
                 <!--</div>
             </div>-->

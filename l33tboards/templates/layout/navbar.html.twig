@@ -26,7 +26,8 @@
                 </button>
                 <div class="dropdown-menu dropdown-menu-right">
                     <a class="dropdown-item" href="#">My Profile</a>
-                    <a class="dropdown-item" href="#">Account settings</a>
+                    <a class="dropdown-item" href="/u/{{app.user.username}}">My Posts</a>
+                    <a class="dropdown-item" href="#">Account</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="{{ url('app_logout') }}">Logout</a>
                 </div>
