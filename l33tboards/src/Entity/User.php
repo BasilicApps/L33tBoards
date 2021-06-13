@@ -48,10 +48,16 @@ class User implements UserInterface
      */
     private $boards;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Board::class, inversedBy="followingUsers")
+     */
+    private $followedBoards;
+
     public function __construct()
     {
         $this->posts = new ArrayCollection();
         $this->boards = new ArrayCollection();
+        $this->followedBoards = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -183,6 +189,30 @@ class User implements UserInterface
         if ($this->boards->removeElement($board)) {
             $board->removeOwner($this);
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Board[]
+     */
+    public function getFollowedBoards(): Collection
+    {
+        return $this->followedBoards;
+    }
+
+    public function addFollowedBoard(Board $followedBoard): self
+    {
+        if (!$this->followedBoards->contains($followedBoard)) {
+            $this->followedBoards[] = $followedBoard;
+        }
+
+        return $this;
+    }
+
+    public function removeFollowedBoard(Board $followedBoard): self
+    {
+        $this->followedBoards->removeElement($followedBoard);
 
         return $this;
     }

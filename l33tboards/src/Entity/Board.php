@@ -49,10 +49,16 @@ class Board
      */
     private $urlTitle;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="followedBoards")
+     */
+    private $followingUsers;
+
     public function __construct()
     {
         $this->owner = new ArrayCollection();
         $this->posts = new ArrayCollection();
+        $this->followingUsers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -161,6 +167,33 @@ class Board
         $urlTitle = preg_replace("/\s+/", "", $urlTitle);
 
         $this->urlTitle = $urlTitle;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getFollowingUsers(): Collection
+    {
+        return $this->followingUsers;
+    }
+
+    public function addFollowingUser(User $followingUser): self
+    {
+        if (!$this->followingUsers->contains($followingUser)) {
+            $this->followingUsers[] = $followingUser;
+            $followingUser->addFollowedBoard($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFollowingUser(User $followingUser): self
+    {
+        if ($this->followingUsers->removeElement($followingUser)) {
+            $followingUser->removeFollowedBoard($this);
+        }
 
         return $this;
     }
