@@ -41,8 +41,17 @@ class BoardController extends AbstractController
     public function toggleFollow(string $urlTitle): Response
     {
         $board = $this->boardRepository->findByUrl($urlTitle)[0];
-        dump($board);
+
         $this->getUser()->addFollowedBoard($board);
+        $board->addFollowingUser($this->getUser());
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($board);
+        $entityManager->persist($this->getUser());
+        $entityManager->flush();
+
+        dump($this->getUser());
+        dump($board);
         return $this->render('board/show.html.twig', [
             'board' => $board
         ]);

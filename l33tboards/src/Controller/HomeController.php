@@ -15,6 +15,7 @@ class HomeController extends AbstractController
     {
         if($this->getUser() != null){
             $boards = $this->getUser()->getFollowedBoards();
+            dump($boards);
         }else{
             $boards = null;
         }
