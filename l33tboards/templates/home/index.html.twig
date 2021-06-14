@@ -12,30 +12,16 @@
                     <!-- Top Trend Cards -->
                     <hr data-content="TOP TRENDINGS" class="hr-text">
                     <div class="my-4">
+                    {% for post in trendingPosts %}
                         <div class="card bg-dark d-inline-flex text-white trend-card mr-3">
                             <img src="https://via.placeholder.com/229x160/222222/222222/?text=1" class="card-img" alt="...">
                             <div class="card-img-overlay d-flex align-content-end flex-wrap">
-                                <h5 class="card-title trend-card-title m-0">Trend #1</h5>
-                                <p class="card-text trend-card-subtitle m-0">Description of trend #1 here.</p>
-                                <p class="card-text trend-card-text">username#1652 and others</p>
+                                <h5 class="card-title trend-card-title m-0">{{ post.title|length > 20 ? post.title|slice(0, 20  ) ~ '...' : post.title }}</h5>
+                                <p class="card-text trend-card-subtitle m-0">{{ post.content|length > 60 ? post.content|slice(0, 60) ~ '...' : post.content }}</p>
+                                <p class="card-text trend-card-text">{{ post.author.username }}</p>
                             </div>
                         </div>
-                        <div class="card bg-dark d-inline-flex text-white trend-card mr-3">
-                            <img src="https://via.placeholder.com/229x160/222222/222222/?text=2" class="card-img" alt="...">
-                            <div class="card-img-overlay d-flex align-content-end flex-wrap">
-                                <h5 class="card-title trend-card-title m-0">Trend #2</h5>
-                                <p class="card-text trend-card-subtitle m-0">Description of trend #2 here.</p>
-                                <p class="card-text trend-card-text">username#6184 and others</p>
-                            </div>
-                        </div>
-                        <div class="card bg-dark d-inline-flex text-white trend-card">
-                            <img src="https://via.placeholder.com/229x160/222222/222222/?text=3" class="card-img" alt="...">
-                            <div class="card-img-overlay d-flex align-content-end flex-wrap">
-                                <h5 class="card-title trend-card-title m-0">Trend #3</h5>
-                                <p class="card-text trend-card-subtitle m-0">Description of trend #3 here.</p>
-                                <p class="card-text trend-card-text">username#8945 and others</p>
-                            </div>
-                        </div>
+                    {% endfor %}
                     </div><br>
                     <!-- Timeline -->
                     <hr data-content="YOUR TIMELINE FEED" class="hr-text">
@@ -69,7 +55,7 @@
                             <li class="timeline-item bg-white rounded ml-3 p-4 shadow">
                                 <div class="timeline-arrow"></div>
                                     <h2 class="post-title mb-0">
-                                        <span class="mx-2">posted <span class="post-title-highlight">{{post.createdAt |date}}</span> by</span>
+                                        <span class="mx-2">posted <span class="post-title-highlight">{{post.createdAt |date}}</span> by {{ post.author.username }}</span>
                                         <img src="{{ asset('/img/default/user_default_24.png') }}" class="rounded-circle shadow mr-2" alt="...">
                                         <span><a href="/u/{{post.author.username}}" class="text-dark">{{post.author.username}}</a></span>
                                     </h2>

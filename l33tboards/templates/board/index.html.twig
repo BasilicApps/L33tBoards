@@ -8,24 +8,23 @@
     <div class="row mt-4">
     {% for board in boards %}
         <div class="col-8">
-        <a href="{{ url("showBoard", {'urlTitle': board.urlTitle}) }}">  <!-- TODO, je pue la chiasse en front-->
-            <li class="timeline-item bg-white rounded ml-3 p-4 shadow">
-                <div class="timeline-arrow"></div>
-                    <h2 class="post-title mb-0">
-                        <h1><spanclass="text-dark">{{board.title}}</span></h1>
-                        <span class="ml-3">Dankness : {{board.score}}</span>
-                        {% if app.user != null %} 
-                            <a href="{{url("toggleFollow", {'urlTitle': board.urlTitle}) }}">
-                                <button type="button" class="btn btn-primary">follow</button> <!-- Je suis toujours nul en front btw -->
-                            </a>
-                        {% endif %}
-                    </h2>
-                </div>
-            </li>
-        </a>
-            
+            <a href="{{ url("showBoard", {'urlTitle': board.urlTitle}) }}">  <!-- TODO, je pue la chiasse en front-->
+                <li class="timeline-item bg-white rounded ml-3 p-4 shadow">
+                    <div class="timeline-arrow"></div>
+                        <h2 class="post-title mb-0">
+                            <h1><spanclass="text-dark">{{board.title}}</span></h1>
+                            <span class="ml-3">Dankness : {{board.score}}</span>
+                            {% if app.user != null %} 
+                                <a href="{{url("toggleFollow", {'urlTitle': board.urlTitle}) }}">
+                                    <button type="button" class="btn btn-primary">follow</button> <!-- Je suis toujours nul en front btw -->
+                                </a>
+                            {% endif %}
+                        </h2>
+                    </div>
+                </li>
+            </a>   
         </div>
-{% endfor %}
+    {% endfor %}
         <div class="col-4" style="margin-top:20px">
             <!-- Right part: TOP + infos + footer -->
             {% include 'layout/footer.html.twig' %}
