@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Board;
 use App\Repository\BoardRepository;
+use Doctrine\ORM\EntityManagerInterface;
 
 class BoardController extends AbstractController
 {
@@ -38,17 +39,16 @@ class BoardController extends AbstractController
      * @Route("/toggleFollow/{urlTitle}", name="toggleFollow", methods={"GET"})
      */
 
-    public function toggleFollow(string $urlTitle): Response
+    public function toggleFollow(string $urlTitle, EntityManagerInterface $em): Response
     {
         $board = $this->boardRepository->findByUrl($urlTitle)[0];
 
         $this->getUser()->addFollowedBoard($board);
         $board->addFollowingUser($this->getUser());
 
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->persist($board);
-        $entityManager->persist($this->getUser());
-        $entityManager->flush();
+        $em->persist($board);
+        $em->persist($this->getUser());
+        $em->flush();
 
         dump($this->getUser());
         dump($board);

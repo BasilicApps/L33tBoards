@@ -8,20 +8,22 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
+
+    private $boards;
     /**
      * @Route("/", name="home")
      */
     public function index(): Response
     {
         if($this->getUser() != null){
-            $boards = $this->getUser()->getFollowedBoards();
-            dump($boards);
+            $this->boards = $this->getUser()->getFollowedBoards();
+            dump($this->getUser());
         }else{
-            $boards = null;
+            $this->boards = null;
         }
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',
-            'boards' => 'boards'
+            'boards' => $this->boards
         ]);
     }
 }
