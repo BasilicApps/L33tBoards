@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Post{% endblock %}
+
+{% block body %}
+<hr data-content="CREATE POST" class="hr-text mt-5">
+<div class="container card mt-4 p-4">
+    {% if app.user %}
+        {% if not app.user.boards is empty %}
+            <div class="alert alert-danger">You need to follow at least one board to post! Please, <a href="{{ url('boards') }}">follow a board</a>.</div>
+        {% else %}
+            <form method="post">
+                <h1 class="h3 mb-4 font-weight-normal">Create a new post</h1>
+
+                <label for="inputTitle">Select Board</label>
+                <select type="text" name="post_title" id="inputTitle" class="form-control" required autofocus>
+                    {% for board in app.user.boards %}
+                        <option>{{board.title}}</option>
+                    {% endfor %}
+                </select><br>
+
+                <label for="inputTitle">Post Title</label>
+                <input type="text" name="post_title" id="inputTitle" class="form-control" required autofocus><br>
+
+                <label for="inputContent">Post Content</label>
+                <textarea name="post_content" id="inputContent" class="form-control" rows="4" required autofocus></textarea><br>
+
+                <button class="btn btn-primary mt-4" type="submit">
+                    Create Post
+                </button>
+            </form>
+        {% endif %}
+    {% else %}
+        <div class="alert alert-danger">You must be logged in to create a new post! Please, <a href="{{ url('app_login') }}">log in</a>.</div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -26,6 +26,22 @@
                     <a href="#" class="btn btn-outline-warning px-4"><i class="fa fa-certificate mr-2"></i>New</a>
                 </div>
             </div>
+            {% if user.posts is empty %}
+                {% if app.user == user %}
+                    <div class="card">
+                        <div class="card-body p-2 text-center">
+                            <img src="{{ asset('/img/schlagos.jpg') }}" class="shadow" alt="ayayou">
+                            <p>T'as rien posté, gros schlagos.</p>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="card">
+                        <div class="card-body p-2 text-center">
+                            <img src="{{ asset('/img/no_meme.png') }}" class="shadow" alt="ayayou">
+                        </div>
+                    </div>
+                {% endif %}
+            {% endif %}
             <div class="row mt-4">
                 <ul class="timeline">
                     {% for post in user.posts %} <!-- ça sera à changer, pour l'instant ça va car on a que quelque posts -->
