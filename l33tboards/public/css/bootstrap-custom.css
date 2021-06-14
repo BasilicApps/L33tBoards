@@ -26,6 +26,8 @@ body {
 .card-user { margin-top: 20px; min-height: 300px; }
 .user-image { min-width: 6em; }
 
+.create-post-image { min-height: 100%; }
+
 /* Timeline holder */
 ul.timeline {
     list-style-type: none;

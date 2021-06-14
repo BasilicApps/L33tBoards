@@ -12,33 +12,36 @@
                     <!-- Top Trend Cards -->
                     <hr data-content="TOP TRENDINGS" class="hr-text">
                     <div class="my-4">
+                    {% for post in trendingPosts %}
                         <div class="card bg-dark d-inline-flex text-white trend-card mr-3">
                             <img src="https://via.placeholder.com/229x160/222222/222222/?text=1" class="card-img" alt="...">
                             <div class="card-img-overlay d-flex align-content-end flex-wrap">
-                                <h5 class="card-title trend-card-title m-0">Trend #1</h5>
-                                <p class="card-text trend-card-subtitle m-0">Description of trend #1 here.</p>
-                                <p class="card-text trend-card-text">username#1652 and others</p>
+                                <h5 class="card-title trend-card-title m-0">{{ post.title|length > 20 ? post.title|slice(0, 20  ) ~ '...' : post.title }}</h5>
+                                <p class="card-text trend-card-subtitle m-0">{{ post.content|length > 60 ? post.content|slice(0, 60) ~ '...' : post.content }}</p>
+                                <p class="card-text trend-card-text">{{ post.author.username }}</p>
                             </div>
                         </div>
-                        <div class="card bg-dark d-inline-flex text-white trend-card mr-3">
-                            <img src="https://via.placeholder.com/229x160/222222/222222/?text=2" class="card-img" alt="...">
-                            <div class="card-img-overlay d-flex align-content-end flex-wrap">
-                                <h5 class="card-title trend-card-title m-0">Trend #2</h5>
-                                <p class="card-text trend-card-subtitle m-0">Description of trend #2 here.</p>
-                                <p class="card-text trend-card-text">username#6184 and others</p>
-                            </div>
-                        </div>
-                        <div class="card bg-dark d-inline-flex text-white trend-card">
-                            <img src="https://via.placeholder.com/229x160/222222/222222/?text=3" class="card-img" alt="...">
-                            <div class="card-img-overlay d-flex align-content-end flex-wrap">
-                                <h5 class="card-title trend-card-title m-0">Trend #3</h5>
-                                <p class="card-text trend-card-subtitle m-0">Description of trend #3 here.</p>
-                                <p class="card-text trend-card-text">username#8945 and others</p>
-                            </div>
-                        </div>
+                    {% endfor %}
                     </div><br>
                     <!-- Timeline -->
                     <hr data-content="YOUR TIMELINE FEED" class="hr-text">
+                    {% if app.user != null %}
+                        <div class="card mb-3">
+                            <div class="card-body p-2 pl-5">
+                                <div class="row">
+                                    <div class="col-1">
+                                        <img src="{{ asset('/img/default/user_default_24.png') }}" class="rounded-circle shadow create-post-image" alt="...">
+                                    </div>
+                                    <div class="col-9">
+                                        <input type="text" class="form-control" placeholder="Create Post" onclick="window.location='{{ url('post') }}'">
+                                    </div>
+                                    <div class="col-2">
+                                        <button class="btn btn-outline-secondary" onclick="window.location='{{ url('post') }}'"><i class="far fa-images"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
                     <div class="card">
                         <div class="card-body p-2">
                             <a href="#" class="btn btn-outline-danger px-4"><i class="fa fa-fire mr-2"></i>Hot</a>
@@ -47,12 +50,30 @@
                         </div>
                     </div>
                     <ul class="timeline">
+                    {% if boards is empty %}
+                        {% if app.user %}
+                            </br>
+                            <div class="card">
+                                <div class="card-body">  <!-- SOS Frontend -->
+                                    <span>To get started, please follow a board <a class="btn btn-primary" href="{{ url('boards') }}">Browse Boards</a> </span>
+                                </div>
+                            </div>
+                        {% else %}
+                            <div class="card">
+                                <div class="card-body">  <!-- SOS Frontend -->
+                                    <span>To get started, please login or register</span> 
+                                    <a href="{{ url('app_login') }}" class="btn btn-outline-primary">Login</a>
+                                    <a href="{{ url('app_register') }}" class="btn btn-primary">Register</a>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endif %}
                         {% for board in boards %} <!-- ça sera à changer, pour l'instant ça va car on a que quelque posts -->
                             {% for post in board.posts %}
                             <li class="timeline-item bg-white rounded ml-3 p-4 shadow">
                                 <div class="timeline-arrow"></div>
                                     <h2 class="post-title mb-0">
-                                        <span class="mx-2">posted <span class="post-title-highlight">{{post.createdAt |date}}</span> by</span>
+                                        <span class="mx-2">posted <span class="post-title-highlight">{{post.createdAt |date}}</span> by {{ post.author.username }}</span>
                                         <img src="{{ asset('/img/default/user_default_24.png') }}" class="rounded-circle shadow mr-2" alt="...">
                                         <span><a href="/u/{{post.author.username}}" class="text-dark">{{post.author.username}}</a></span>
                                     </h2>

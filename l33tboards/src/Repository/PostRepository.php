@@ -36,6 +36,16 @@ class PostRepository extends ServiceEntityRepository
     }
     */
 
+    public function find3MostTrending()
+    {
+        return $this->createQueryBuilder('p')
+            ->orderBy('p.score', 'ASC')
+            ->setMaxResults(3)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     /*
     public function findOneBySomeField($value): ?Post
     {

@@ -4,24 +4,37 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use App\Repository\PostRepository;
 use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
+
+
+    private $posts;
+    private $boards;
+
+
     /**
      * @Route("/", name="home")
      */
-    public function index(): Response
+    public function index(PostRepository $postRepository): Response
     {
+        $this->postRepository = $postRepository;
+        $this->posts = $this->postRepository->find3MostTrending();
         if($this->getUser() != null){
-            $boards = $this->getUser()->getFollowedBoards();
-            dump($boards);
+            $this->boards = $this->getUser()->getFollowedBoards();
+            dump($this->getUser());
         }else{
-            $boards = null;
+            $this->boards = null;
         }
+        dump($this->posts);
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',
-            'boards' => 'boards'
+            'boards' => $this->boards,
+            'trendingPosts' => $this->posts
+
+
         ]);
     }
 }
