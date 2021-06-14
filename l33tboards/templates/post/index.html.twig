@@ -6,7 +6,7 @@
 <hr data-content="CREATE POST" class="hr-text mt-5">
 <div class="container card mt-4 p-4">
     {% if app.user %}
-        {% if not app.user.boards is empty %}
+        {% if app.user.followedBoards is empty %}
             <div class="alert alert-danger">You need to follow at least one board to post! Please, <a href="{{ url('boards') }}">follow a board</a>.</div>
         {% else %}
             <form method="post">
@@ -14,7 +14,7 @@
 
                 <label for="inputTitle">Select Board</label>
                 <select type="text" name="post_title" id="inputTitle" class="form-control" required autofocus>
-                    {% for board in app.user.boards %}
+                    {% for board in app.user.followedBoards %}
                         <option>{{board.title}}</option>
                     {% endfor %}
                 </select><br>

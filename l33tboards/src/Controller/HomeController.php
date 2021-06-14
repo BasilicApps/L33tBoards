@@ -12,6 +12,7 @@ class HomeController extends AbstractController
 
 
     private $posts;
+    private $boards;
 
 
     /**
@@ -30,7 +31,7 @@ class HomeController extends AbstractController
         dump($this->posts);
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',
-            'boards' => $boards,
+            'boards' => $this->boards,
             'trendingPosts' => $this->posts
 
 
