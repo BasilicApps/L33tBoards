@@ -4,6 +4,14 @@ body {
     background: linear-gradient(to right, #E8CBC0, #636FA4);
     min-height: 100vh;
 }
+.custom-content{
+
+}
+
+.custom-content:hover{
+    box-shadow: 0px 0px 10px black;
+    border: 3px solid black !important;
+    border-radius: 5px !important;}
 
 .text-gray { color: #999; }
 
