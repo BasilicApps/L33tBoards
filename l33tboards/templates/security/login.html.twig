@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
+{% block title %}{% trans %}Log in!{% endtrans %}{% endblock %}
 
 {% block body %}
 <div class="container mt-4">
@@ -14,16 +14,16 @@
 
                     {% if app.user %}
                         <div class="alert alert-warning py-3">
-                            You are logged in as {{ app.user.username }} <a class="btn btn-sm btn-danger float-right" href="{{ path('app_logout') }}">Logout</a>
+                            {% trans %}You are logged in as{% endtrans %} {{ app.user.username }} <a class="btn btn-sm btn-danger float-right" href="{{ path('app_logout') }}">{% trans %}Logout{% endtrans %}</a>
                         </div>
                     {% endif %}
 
-                    <h1 class="h3 mb-4 font-weight-normal">Please sign in</h1>
+                    <h1 class="h3 mb-4 font-weight-normal">{% trans %}Please sign in{% endtrans %}</h1>
 
-                    <label for="inputUsername">Username</label>
+                    <label for="inputUsername">{% trans %}Username{% endtrans %}</label>
                     <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" autocomplete="username" required autofocus><br>
 
-                    <label for="inputPassword">Password</label>
+                    <label for="inputPassword">{% trans %}Password{% endtrans %}</label>
                     <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
 
                     <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
@@ -40,7 +40,7 @@
                     #}
 
                     <button class="btn btn-primary mt-4" type="submit">
-                        Sign in
+                        {% trans %}Sign in{% endtrans %}
                     </button>
                 </form>
             </div>

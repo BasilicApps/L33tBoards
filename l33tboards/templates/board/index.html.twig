@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Boards{% endblock %}
+{% block title %}{% trans %}Boards{% endtrans %}{% endblock %}
 
 {% block body %}
 <div class="container">
@@ -13,15 +13,15 @@
                     <div class="timeline-arrow"></div>
                         <h2 class="post-title mb-0">
                             <h1><spanclass="text-dark">{{board.title}}</span></h1>
-                            <span class="ml-3">Dankness : {{board.score}}</span>
+                            <span class="ml-3">{% trans %}Dankness{% endtrans %} : {{board.score}}</span>
                             {% if app.user != null %} 
                                 {% if board in app.user.followedBoards %}
                                     <a href="{{url("unFollow", {'urlTitle': board.urlTitle}) }}">
-                                        <button type="button" class="btn btn-danger">unfollow</button> <!-- Je suis toujours nul en front btw -->
+                                        <button type="button" class="btn btn-danger">{% trans %}unfollow{% endtrans %}</button> <!-- Je suis toujours nul en front btw -->
                                     </a>
                                 {% else %}
                                     <a href="{{url("follow", {'urlTitle': board.urlTitle}) }}">
-                                        <button type="button" class="btn btn-primary">follow</button> <!-- Je suis toujours nul en front btw -->
+                                        <button type="button" class="btn btn-primary">{% trans %}follow{% endtrans %}</button> <!-- Je suis toujours nul en front btw -->
                                     </a>
                                 {% endif %}
                             {% endif %}
