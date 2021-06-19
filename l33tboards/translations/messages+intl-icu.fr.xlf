@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" target-language="fr" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="4oWf8Lg" resname="My Feed">
+        <source>My Feed</source>
+        <target>Mon fil d'actualité</target>
+      </trans-unit>
+      <trans-unit id="DwXOFM1" resname="To get started, please follow a board">
+        <source>To get started, please follow a board</source>
+        <target>Pour démarrer, veuillez suivre un board</target>
+      </trans-unit>
+      <trans-unit id="X6qIgAo" resname="Browse Boards">
+        <source>Browse Boards</source>
+        <target>Parcourir les boards</target>
+      </trans-unit>
+      <trans-unit id="mbVm9kI" resname="To get started, please login or register">
+        <source>To get started, please login or register</source>
+        <target>Pour démarrer, veuillez vous connecter ou créer un compte</target>
+      </trans-unit>
+      <trans-unit id="nWMiwfT" resname="Login">
+        <source>Login</source>
+        <target>Connexion</target>
+      </trans-unit>
+      <trans-unit id="u3I07BJ" resname="Register">
+        <source>Register</source>
+        <target>Créer un compte</target>
+      </trans-unit>
+      <trans-unit id="FjfMaD1" resname="posted">
+        <source>posted</source>
+        <target>posté</target>
+      </trans-unit>
+      <trans-unit id="p_LSbo0" resname="by">
+        <source>by</source>
+        <target>par</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
