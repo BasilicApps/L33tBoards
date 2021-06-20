@@ -54,11 +54,17 @@ class Board
      */
     private $followingUsers;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=UserBoardVote::class, mappedBy="board")
+     */
+    private $userBoardVotes;
+
     public function __construct()
     {
         $this->owner = new ArrayCollection();
         $this->posts = new ArrayCollection();
         $this->followingUsers = new ArrayCollection();
+        $this->userBoardVotes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -193,6 +199,33 @@ class Board
     {
         if ($this->followingUsers->removeElement($followingUser)) {
             $followingUser->removeFollowedBoard($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|UserBoardVote[]
+     */
+    public function getUserBoardVotes(): Collection
+    {
+        return $this->userBoardVotes;
+    }
+
+    public function addUserBoardVote(UserBoardVote $userBoardVote): self
+    {
+        if (!$this->userBoardVotes->contains($userBoardVote)) {
+            $this->userBoardVotes[] = $userBoardVote;
+            $userBoardVote->addBoard($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserBoardVote(UserBoardVote $userBoardVote): self
+    {
+        if ($this->userBoardVotes->removeElement($userBoardVote)) {
+            $userBoardVote->removeBoard($this);
         }
 
         return $this;
