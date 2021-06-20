@@ -25,7 +25,7 @@
                     <span class="sr-only"></span>
                 </button>
                 <div class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" href="#">{% trans %}My Profile{% endtrans %}</a>
+                    <a class="dropdown-item" href="/u/profil/{{app.user.username}}">{% trans %}My Profile{% endtrans %}</a>
                     <a class="dropdown-item" href="/u/{{app.user.username}}">{% trans %}My Posts{% endtrans %}</a>
                     <a class="dropdown-item" href="#">{% trans %}Account{% endtrans %}</a>
                     <div class="dropdown-divider"></div>
