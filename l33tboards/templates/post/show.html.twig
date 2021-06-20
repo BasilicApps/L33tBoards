@@ -10,7 +10,7 @@
                     <li class="timeline-item bg-white rounded ml-3 p-4 shadow">
                         <div class="timeline-arrow"></div>
                             <h2 class="post-title mb-0">
-                                <span class="mx-2">{% trans %}posted{% endtrans %} <span class="post-title-highlight">{{post.createdAt |date}}</span> {% trans %}by{% endtrans %}</span>
+                                <span class="mr-2">{% trans %}posted{% endtrans %} <span class="post-title-highlight">{{post.createdAt |date}}</span> {% trans %}by{% endtrans %}</span>
                                 <img src="{{ asset('/img/default/user_default_24.png') }}" class="rounded-circle shadow mr-2" alt="...">
                                 <span><a href="/u/{{post.author.username}}" class="text-dark">{{post.author.username}}</a></span>
                                 
