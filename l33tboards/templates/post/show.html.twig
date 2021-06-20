@@ -32,11 +32,21 @@
     <div class="row mt-4">
         <div class="row mt-4">
             <ul class="timeline">
+                {% for comment in post.comments %}
                     <li class="timeline-item bg-white rounded ml-3 p-4 shadow">
                         <div class="timeline-arrow"></div>
-                        <p> @devs, we need to include the comments to keep going here</p>
+                                        <span class="mx-2">{% trans %}posted{% endtrans %} 
+                                            <span class="post-title-highlight">{{comment.createdAt |date}}</span> {% trans %}by{% endtrans %} <a href="/u/{{comment.author.username}}" class="text-dark">{{comment.author.username}}</a>
+                                        </span>
+                                        <img src="{{ asset('/img/default/user_default_24.png') }}" class="rounded-circle shadow mr-2" alt="...">
+                                    </h2>
+                                <a style="color: #000000; text-decoration: none;" href="{{ url("showPost", {'id': post.id}) }}"> 
+                                <div class="post-content">
+                                    <div class="text-center">
+                                        {{comment.content}}
+                                    </div>
                     </li>
-
+                {% endfor %}
             </ul>
         </div>
     </div>
