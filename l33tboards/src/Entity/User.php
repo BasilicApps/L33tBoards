@@ -54,11 +54,6 @@ class User implements UserInterface
     private $followedBoards;
 
     /**
-     * @ORM\ManyToMany(targetEntity=UserBoardVote::class, mappedBy="user")
-     */
-    private $userBoardVotes;
-
-    /**
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="author", orphanRemoval=true)
      */
     private $comments;
@@ -68,7 +63,6 @@ class User implements UserInterface
         $this->posts = new ArrayCollection();
         $this->boards = new ArrayCollection();
         $this->followedBoards = new ArrayCollection();
-        $this->userBoardVotes = new ArrayCollection();
         $this->comments = new ArrayCollection();
     }
 
@@ -225,33 +219,6 @@ class User implements UserInterface
     public function removeFollowedBoard(Board $followedBoard): self
     {
         $this->followedBoards->removeElement($followedBoard);
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|UserBoardVote[]
-     */
-    public function getUserBoardVotes(): Collection
-    {
-        return $this->userBoardVotes;
-    }
-
-    public function addUserBoardVote(UserBoardVote $userBoardVote): self
-    {
-        if (!$this->userBoardVotes->contains($userBoardVote)) {
-            $this->userBoardVotes[] = $userBoardVote;
-            $userBoardVote->addUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeUserBoardVote(UserBoardVote $userBoardVote): self
-    {
-        if ($this->userBoardVotes->removeElement($userBoardVote)) {
-            $userBoardVote->removeUser($this);
-        }
 
         return $this;
     }

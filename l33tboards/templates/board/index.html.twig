@@ -14,6 +14,8 @@
                         <h1 class="display-4"><i class="fa fa-book mr-4" style="font-size:50px;" aria-hidden="true"></i><span style="overflow-wrap:anywhere;text-overflow:ellipsis;">{{ board.urlTitle|length > 10 ? board.urlTitle|slice(0, 10) ~ '...' : board.urlTitle }}</span></h1>
                         <span>
                             <p class="lead">{% trans %}Dankness{% endtrans %} : {{board.score}}</p>
+                            <!--<a href="#" class="btn btn-thumb-liked"><i class="fa fa-thumbs-up mr-1"></i></button>
+                            <a href="#" class="btn btn-thumb-unliked"><i class="fa fa-thumbs-down mr-1"></i></button>-->
                             <a href="#" class="btn btn-thumb"><i class="fa fa-thumbs-up mr-1"></i></button>
                             <a href="#" class="btn btn-thumb"><i class="fa fa-thumbs-down mr-1"></i></button>
                         </span>

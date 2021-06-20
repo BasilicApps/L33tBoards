@@ -7,22 +7,18 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Board;
-use App\Entity\UserBoardVote;
 use App\Repository\BoardRepository;
-use App\Repository\UserBoardVoteRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
 class BoardController extends AbstractController
 {
 
     private $boardRepository;
-    private $userBoardVoteRepository;
     private $boards;
 
-    public function __construct(BoardRepository $boardRepository, UserBoardVoteRepository $userBoardVoteRepository)
+    public function __construct(BoardRepository $boardRepository)
     {
         $this->boardRepository = $boardRepository;
-        $this->userBoardVoteRepository = $userBoardVoteRepository;
         $this->boards = $this->boardRepository->findLast(10);
     }
 
@@ -41,7 +37,7 @@ class BoardController extends AbstractController
      * @Route("/follow/{urlTitle}", name="follow", methods={"GET"})
      */
 
-    public function follow(string $urlTitle, EntityManagerInterface $em): Response
+    public function follow(Request $request, string $urlTitle, EntityManagerInterface $em): Response
     {
         $board = $this->boardRepository->findByUrl($urlTitle)[0];
 
@@ -54,16 +50,18 @@ class BoardController extends AbstractController
 
         dump($this->getUser());
         dump($board);
-        return $this->render('board/show.html.twig', [
+
+        return $this->redirect($request->headers->get('referer'));
+        /*return $this->render('board/show.html.twig', [
             'board' => $board
-        ]);
+        ]);*/
     }
 
         /**
      * @Route("/unFollow/{urlTitle}", name="unFollow", methods={"GET"})
      */
 
-    public function unFollow(string $urlTitle, EntityManagerInterface $em): Response
+    public function unFollow(Request $request, string $urlTitle, EntityManagerInterface $em): Response
     {
         $board = $this->boardRepository->findByUrl($urlTitle)[0];
 
@@ -76,9 +74,11 @@ class BoardController extends AbstractController
 
         dump($this->getUser());
         dump($board);
-        return $this->render('board/show.html.twig', [
+
+        return $this->redirect($request->headers->get('referer'));
+        /*return $this->render('board/show.html.twig', [
             'board' => $board
-        ]);
+        ]);*/
     }
 
     public function upVoteBoard(Request $request, EntityManagerInterface $em, string $boardUrlTitle): Response {
@@ -86,20 +86,11 @@ class BoardController extends AbstractController
         $board = $this->boardRepository->findByUrl($boardUrlTitle)[0];
         $user = $this->getUser();
 
-        // Génération d'une info. d'upvote utilisateur pour un board spécifique
-        $uBoardVote = new UserBoardVote();
-        $uBoardVote->addUser($user);
-        $uBoardVote->addBoard($board);
-        $uBoardVote->setLiked(true);
-
-        // Association user/board avec l'user/board/vote
-        $user->addUserBoardVote($uBoardVote);
-        $board->addUserBoardVote($uBoardVote);
+        // TODO
 
         // Enregistrement des entités modifiées en BDD
         $em->persist($board);
         $em->persist($user);
-        $em->persist($uBoardVote);
         $em->flush();
 
         // Redirection auto vers la page précédente
@@ -111,20 +102,11 @@ class BoardController extends AbstractController
         $board = $this->boardRepository->findByUrl($boardUrlTitle)[0];
         $user = $this->getUser();
 
-        // Génération d'une info. d'upvote utilisateur pour un board spécifique
-        $uBoardVote = new UserBoardVote();
-        $uBoardVote->addUser($user);
-        $uBoardVote->addBoard($board);
-        $uBoardVote->setLiked(false);
-
-        // Association user/board avec l'user/board/vote
-        $user->addUserBoardVote($uBoardVote);
-        $board->addUserBoardVote($uBoardVote);
+        // TODO
 
         // Enregistrement des entités modifiées en BDD
         $em->persist($board);
         $em->persist($user);
-        $em->persist($uBoardVote);
         $em->flush();
 
         // Redirection auto vers la page précédente
@@ -136,17 +118,11 @@ class BoardController extends AbstractController
         $board = $this->boardRepository->findByUrl($boardUrlTitle)[0];
         $user = $this->getUser();
 
-        // Récupération de l'association user/board et du vote associé
-        $uBoardVote = $this->userBoardVoteRepository->findByUserAndBoard($user, $board)[0];
-
-        // Association user/board avec l'user/board/vote
-        $user->removeUserBoardVote($uBoardVote);
-        $board->removeUserBoardVote($uBoardVote);
+        // TODO
 
         // Enregistrement des entités modifiées en BDD
         $em->persist($board);
         $em->persist($user);
-        $em->remove($uBoardVote);
         $em->flush();
 
         // Redirection auto vers la page précédente
