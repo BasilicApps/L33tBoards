@@ -6,20 +6,16 @@
 
 {% block body %}
 
-    <div class="card board-header">
+<div class="container">
+    <div class="card rounded-0 board-header">
         <div class="row mt-4 board-header-content">
-            <div class="col-2">
-                <img src="{{ asset('/img/default/user_default_24.png') }}" class="rounded-circle shadow mr-2 board-image" alt="..."></div>
-                <div class="col-10">
-                    <h1>
-                        {{ user.username }}
-                        {% trans %}
-                        's Configuration!
-                        {% endtrans %}
-                    </h1>
-                </div>
+            <div class="col-12 d-flex align-items-center justify-content-center">
+                <img src="{{ asset('/img/default/user_default_big.png') }}" width="100px" class="rounded-circle shadow mr-4" alt="User">
+                <h1>{{user.username}}{% trans %}'s Profile!{% endtrans %}</h1>
             </div>
+
         </div>
+    </div>
         <div class="container">
             <div class="row">
                 <div class="col-md-8">
@@ -113,16 +109,13 @@
                                 {% endfor %}
                             </ul>
                         </div>
-                <div class="col-md-4 col-none">
-                <div class="card text-center card-user">
-                    <div>
-                        <img src="{{ asset('/img/default/user_default_24.png') }}" class="rounded-circle shadow mr-2 user-image" alt="..."></div>
-                            <div>
-                                {{ user.username }}
-                            </div>
-                        </div>
-                    </div>
-                </div>
+               
+        <div class="col-md-4 col-none">
+            <div class="card p-4 d-flex align-items-center flex-column text-center card-user">
+                <img src="{{ asset('/img/default/user_default_big.png') }}" width="100px" class="rounded-circle shadow user-image" alt="...">
+                <h4 class="mt-4">{{user.username}}</h4>
+            </div>
+        </div>
             </div>
         </div>
 
