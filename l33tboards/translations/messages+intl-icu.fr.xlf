@@ -221,6 +221,18 @@
         <source>Post comment</source>
         <target>Commenter</target>
       </trans-unit>
+      <trans-unit id="thM5xzP" resname="Post Number">
+        <source>Post Number</source>
+        <target state="translated">Nombre de publications</target>
+      </trans-unit>
+      <trans-unit id="qu2GTcR" resname="Like Number">
+        <source>Like Number</source>
+        <target state="translated">Nombre de j'aime</target>
+      </trans-unit>
+      <trans-unit id="3mU_2kv" resname="Comments Number">
+        <source>Comments Number</source>
+        <target state="translated">Nombre de commentaires</target>
+      </trans-unit>
       <trans-unit id="krc.zdY" resname="Public board">
         <source>Public board</source>
         <target>Board publique</target>

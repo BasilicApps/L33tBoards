@@ -40,6 +40,35 @@ class HomeController extends AbstractController
     }
 
     /**
+     * @Route("/search", name="search")
+     */
+    public function Search(Request $request)
+    {
+        $data = $request->request->all();
+
+        $temp = "%";
+        dump($data["search"]);
+
+        if($data["search"] != null){
+            $temp = "%".$data["search"]."%";
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $query = $em->createQueryBuilder()->select('b')
+        ->from('App:Board','b')
+        ->andWhere('b.title LIKE :string')
+        ->setParameter('string',$temp)
+        ->getQuery();
+
+
+        $res = $query->execute();
+
+        return $this->render('board/index.html.twig', [
+            'boards' => $res
+        ]);
+    }
+
+    /**
      * @Route("/language/{locale}", name="updateLocale")
      */
     public function updateLocale($locale, Request $request) {
