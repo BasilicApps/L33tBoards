@@ -13,6 +13,7 @@
                     <hr data-content="{% trans %}TOP TRENDINGS{% endtrans %}" class="hr-text">
                     <div class="my-4">
                     {% for post in trendingPosts %}
+                    <a style="color: #000000; text-decoration: none;" href="{{ url("showPost", {'id': post.id}) }}"> 
                         <div class="card bg-dark d-inline-flex text-white trend-card mr-2">
                             <img src="https://via.placeholder.com/229x160/222222/222222/?text=1" class="card-img" alt="...">
                             <div class="card-img-overlay d-flex align-content-end flex-wrap">
@@ -20,7 +21,7 @@
                                 <p class="card-text trend-card-subtitle m-0">{{ post.content|length > 60 ? post.content|slice(0, 60) ~ '...' : post.content }}</p>
                                 <p class="card-text trend-card-text">{{ post.author.username }}</p>
                             </div>
-                        </div>
+                        </div></a>
                     {% endfor %}
                     </div><br>
                     <!-- Timeline -->
