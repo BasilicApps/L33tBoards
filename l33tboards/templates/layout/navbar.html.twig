@@ -38,7 +38,7 @@
         {% endif %}
         <div class="dropdown">
             <button class="btn btn-dark dropdown-toggle" type="button" id="languageDropdownBtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                {% set userCurrentLocale = app.session.get('_locale') %}
+                {% set userCurrentLocale = app.session.get('_locale') is empty ? 'en' : app.session.get('_locale') %}
                 <img src="{{ asset('/img/locales/'~ userCurrentLocale ~'.png') }}" alt="{{ userCurrentLocale }}" width="24">
             </button>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="languageDropdownBtn">
