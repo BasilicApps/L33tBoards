@@ -4,6 +4,7 @@
 
 {% block body %}
 <div class="container">
+    <div class="row">
         <div class="col-8" style="margin-top:20px">
             {% for board in boards %}
                 <a href="{{ url("showBoard", {'urlTitle': board.urlTitle}) }}">
@@ -32,4 +33,5 @@
             {% include 'layout/footer.html.twig' %}
         </div>
     </div>
+</div>
 {% endblock %}
