@@ -45,8 +45,18 @@
     <hr data-content="{% trans %}COMMENTS{% endtrans %}" class="hr-text">
     <div class="row mt-4">
         <div class="row mt-4">
+            {% if app.user %}
+                <div class="container card m-4 p-4">
+                    {{ form_start(commentForm) }}
+                        {{ form_row(commentForm.content) }}
+                        <button class="btn btn-primary mt-4" type="submit">
+                            {% trans %}Post comment{% endtrans %}
+                        </button>
+                    {{ form_end(commentForm) }}
+                </div>
+            {% endif %}
             <ul class="timeline">
-                {% for comment in post.comments %}
+                {% for comment in post.comments|reverse %}
                     <li class="timeline-item bg-white rounded ml-3 p-4 shadow">
                         <div class="timeline-arrow"></div>
                             <span class="mx-2">{% trans %}posted{% endtrans %} 
