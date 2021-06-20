@@ -81,33 +81,6 @@
                                 </span>
                             </div>
                         </div>
-
-                        <ul class="timeline">
-                            {% for comment in user.comments %}
-                                <li class="timeline-item bg-white rounded ml-3 p-4 shadow">
-                                    <div class="timeline-arrow"></div>
-                                    <span class="mx-2">
-                                        {% trans %}
-                                        posted
-                                        {% endtrans %}
-                                        <span class="post-title-highlight">
-                                            {{ comment.createdAt |date }}
-                                        </span>
-                                        {% trans %}
-                                        by
-                                        {% endtrans %}
-                                        <a href="/u/{{ comment.author.username }}" class="text-dark">
-                                            {{ comment.author.username }}
-                                        </a>
-                                    </span>
-                                    <img src="{{ asset('/img/default/user_default_24.png') }}" class="rounded-circle shadow mr-2" alt="..."></h2>
-                                    <div class="post-content">
-                                        <div class="text-center">
-                                            {{ comment.content }}
-                                        </div>
-                                    </li>
-                                {% endfor %}
-                            </ul>
                         </div>
                
         <div class="col-md-4 col-none">
