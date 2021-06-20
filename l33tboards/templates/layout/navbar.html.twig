@@ -16,7 +16,10 @@
         </div>
         
     </div>
-    <a class="btn btn-primary" href="{{ url('boards') }}">{% trans %}Browse Boards{% endtrans %}</a>
+    <div>
+        <a class="btn btn-primary" href="{{ url('boards') }}">{% trans %}Browse Boards{% endtrans %}</a>
+        <a class="btn btn-primary" href="{{ url('createBoard') }}">+</a>
+    </div>
     <div class="text-right d-flex">
         {% if app.user %}
             <div class="btn-group mr-2">

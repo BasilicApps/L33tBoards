@@ -24,6 +24,23 @@
     <!-- Timeline -->
     <hr data-content="{% trans %}BOARD TIMELINE FEED{% endtrans %}" class="hr-text">
     <div class="card">
+        {% if app.user != null %}
+            <div class="card mb-3">
+                <div class="card-body p-2 pl-5">
+                    <div class="row">
+                        <div class="col-1">
+                            <img src="{{ asset('/img/default/user_default_24.png') }}" class="rounded-circle shadow create-post-image" alt="...">
+                        </div>
+                        <div class="col-9">
+                            <input type="text" class="form-control" placeholder="{% trans %}Create Post{% endtrans %}" onclick="window.location='{{ url('post') }}'">
+                        </div>
+                        <div class="col-2">
+                            <button class="btn btn-outline-secondary" onclick="window.location='{{ url('post') }}'"><i class="far fa-images"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
         <div class="card-body p-2">
             <a href="#" class="btn btn-outline-danger px-4"><i class="fa fa-fire mr-2"></i>{% trans %}Hot{% endtrans %}</a>
             <a href="#" class="btn btn-outline-primary px-4"><i class="fa fa-chart-bar mr-2"></i>{% trans %}Top{% endtrans %}</a>
