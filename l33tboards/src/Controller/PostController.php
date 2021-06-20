@@ -59,7 +59,7 @@ class PostController extends AbstractController
         /**
      * @Route("/post/{id}", name="showPost")
      */
-    public function show(int $id, Request $request, TranslatorInterface $translator): Response
+    public function show(int $id, Request $request): Response
     {
         $post = $this->postRepository->findById($id)[0];
         
