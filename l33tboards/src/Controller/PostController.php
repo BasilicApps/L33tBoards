@@ -6,9 +6,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use App\Repository\PostRepository;
 
 use App\Form\PostFormType;
+use App\Form\CommentFormType;
+
+use App\Entity\Comment;
 
 class PostController extends AbstractController
 {
@@ -18,7 +22,6 @@ class PostController extends AbstractController
     {
         $this->postRepository = $postRepository;
     }
-
 
     /**
      * @Route("/post", name="post")
@@ -54,15 +57,37 @@ class PostController extends AbstractController
     }
 
         /**
-     * @Route("/post/{id}", name="showPost", methods={"GET"})
+     * @Route("/post/{id}", name="showPost")
      */
-    public function show(int $id): Response
+    public function show(int $id, Request $request, TranslatorInterface $translator): Response
     {
         $post = $this->postRepository->findById($id)[0];
-        dump($post);
+        
+        $commentForm = $this->createForm(CommentFormType::class);
+        $commentForm->handleRequest($request);
+        
+        if ($commentForm->isSubmitted() && $commentForm->isValid())
+        {
+            /** @var Comment $comment */
+            $comment = $commentForm->getData();
+            $comment
+                ->setAuthor($this->getUser())
+                ->setCreatedAt(new \DateTime())
+            ;
+            $comment->setPost($post);
+            $post->addComment($comment);
+
+            $manager = $this->getDoctrine()->getManager();
+            $manager->persist($post);
+            $manager->persist($comment);
+            $manager->flush();
+
+            return $this->redirect($request->getUri());
+        }
     
         return $this->render('post/show.html.twig', [
-            'post' => $post
+            'post' => $post,
+            'commentForm' => $commentForm->createView()
         ]);
     }
 }
