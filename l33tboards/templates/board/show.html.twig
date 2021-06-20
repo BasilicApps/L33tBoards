@@ -29,7 +29,7 @@
     </div>
     <div class="row mt-4">
         <ul class="timeline">
-            {% for post in board.posts %} <!-- ça sera à changer, pour l'instant ça va car on a que quelque posts -->
+            {% for post in board.posts|reverse %} <!-- gros cerveau : les plus récent avant :weSmart: -->
             <li class="timeline-item bg-white rounded ml-3 p-4 shadow">
                 <div class="timeline-arrow"></div>
                     <h2 class="post-title mb-0">

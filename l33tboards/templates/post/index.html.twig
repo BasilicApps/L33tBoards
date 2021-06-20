@@ -9,26 +9,14 @@
         {% if app.user.followedBoards is empty %}
             <div class="alert alert-danger">{% trans %}You need to follow at least one board to post! Please,{% endtrans %} <a href="{{ url('boards') }}">{% trans %}follow a board{% endtrans %}</a>.</div>
         {% else %}
-            <form method="post">
-                <h1 class="h3 mb-4 font-weight-normal">{% trans %}Create a new post{% endtrans %}</h1>
-
-                <label for="inputTitle">{% trans %}Select Board{% endtrans %}</label>
-                <select type="text" name="post_title" id="inputTitle" class="form-control" required autofocus>
-                    {% for board in app.user.followedBoards %}
-                        <option>{{board.title}}</option>
-                    {% endfor %}
-                </select><br>
-
-                <label for="inputTitle">{% trans %}Post Title{% endtrans %}</label>
-                <input type="text" name="post_title" id="inputTitle" class="form-control" required autofocus><br>
-
-                <label for="inputContent">{% trans %}Post Content{% endtrans %}</label>
-                <textarea name="post_content" id="inputContent" class="form-control" rows="4" required autofocus></textarea><br>
-
+            {{ form_start(postForm) }}
+                {{  form_row(postForm.board) }}
+                {{  form_row(postForm.title) }}
+                {{  form_row(postForm.content) }}
                 <button class="btn btn-primary mt-4" type="submit">
                     {% trans %}Create Post{% endtrans %}
                 </button>
-            </form>
+            {{  form_end(postForm) }}
         {% endif %}
     {% else %}
         <div class="alert alert-danger">{% trans %}You must be logged in to create a new post! Please,{% endtrans %} <a href="{{ url('app_login') }}">{% trans %}log in{% endtrans %}</a>.</div>
