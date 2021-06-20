@@ -1,38 +1,35 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Boards{% endblock %}
+{% block title %}{% trans %}Boards{% endtrans %}{% endblock %}
 
 {% block body %}
 <div class="container">
-
-
-    {% for board in boards %}
-
-        <a href="{{ url("showBoard", {'urlTitle': board.urlTitle}) }}" >
-            <div class="jumbotron jumbotron-fluid ">
-                <div class="container ">
-                            <h1 class="display-4">  {{ board.urlTitle}} </h1>
-                            <p class="lead">Dankness : {{board.score}}</p>
+        <div class="col-8" style="margin-top:20px">
+            {% for board in boards %}
+                <a href="{{ url("showBoard", {'urlTitle': board.urlTitle}) }}">
+                    <div class="jumbotron jumbotron-fluid">
+                        <div class="container">
+                            <h1 class="display-4">{{ board.urlTitle}}</h1>
+                            <p class="lead">{% trans %}Dankness{% endtrans %} : {{board.score}}</p>
                             {% if app.user != null %} 
                                 {% if board in app.user.followedBoards %}
                                     <a href="{{url("unFollow", {'urlTitle': board.urlTitle}) }}">
-                                        <button type="button" class="btn btn-danger">unfollow</button>
+                                        <button type="button" class="btn btn-danger">{% trans %}unfollow{% endtrans %}</button>
                                     </a>
                                 {% else %}
                                     <a href="{{url("follow", {'urlTitle': board.urlTitle}) }}">
-                                        <button type="button" class="btn btn-primary">follow</button>
+                                        <button type="button" class="btn btn-primary">{% trans %}follow{% endtrans %}</button>
                                     </a>
                                 {% endif %}
                             {% endif %}
-                </div>
-            </div>
-        </a>
-
-    {% endfor %}
+                        </div>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
         <div class="col-4" style="margin-top:20px">
             <!-- Right part: TOP + infos + footer -->
             {% include 'layout/footer.html.twig' %}
         </div>
     </div>
-
 {% endblock %}

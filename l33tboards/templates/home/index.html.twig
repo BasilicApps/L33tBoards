@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Mon Feed - L33TBOARDS{% endblock %}
+{% block title %}{% trans %}My Feed{% endtrans %} - L33TBOARDS{% endblock %}
 
 {% block body %}
 <div class="container">
@@ -10,10 +10,10 @@
             <!--<div class="row">
                 <div class="col-lg-7 mx-auto">-->
                     <!-- Top Trend Cards -->
-                    <hr data-content="TOP TRENDINGS" class="hr-text">
+                    <hr data-content="{% trans %}TOP TRENDINGS{% endtrans %}" class="hr-text">
                     <div class="my-4">
                     {% for post in trendingPosts %}
-                        <div class="card bg-dark d-inline-flex text-white trend-card mr-3">
+                        <div class="card bg-dark d-inline-flex text-white trend-card mr-2">
                             <img src="https://via.placeholder.com/229x160/222222/222222/?text=1" class="card-img" alt="...">
                             <div class="card-img-overlay d-flex align-content-end flex-wrap">
                                 <h5 class="card-title trend-card-title m-0">{{ post.title|length > 20 ? post.title|slice(0, 20  ) ~ '...' : post.title }}</h5>
@@ -24,7 +24,7 @@
                     {% endfor %}
                     </div><br>
                     <!-- Timeline -->
-                    <hr data-content="YOUR TIMELINE FEED" class="hr-text">
+                    <hr data-content="{% trans %}YOUR TIMELINE FEED{% endtrans %}" class="hr-text">
                     {% if app.user != null %}
                         <div class="card mb-3">
                             <div class="card-body p-2 pl-5">
@@ -33,7 +33,7 @@
                                         <img src="{{ asset('/img/default/user_default_24.png') }}" class="rounded-circle shadow create-post-image" alt="...">
                                     </div>
                                     <div class="col-9">
-                                        <input type="text" class="form-control" placeholder="Create Post" onclick="window.location='{{ url('post') }}'">
+                                        <input type="text" class="form-control" placeholder="{% trans %}Create Post{% endtrans %}" onclick="window.location='{{ url('post') }}'">
                                     </div>
                                     <div class="col-2">
                                         <button class="btn btn-outline-secondary" onclick="window.location='{{ url('post') }}'"><i class="far fa-images"></i></button>
@@ -44,9 +44,9 @@
                     {% endif %}
                     <div class="card">
                         <div class="card-body p-2">
-                            <a href="#" class="btn btn-outline-danger px-4"><i class="fa fa-fire mr-2"></i>Hot</a>
-                            <a href="#" class="btn btn-outline-primary px-4"><i class="fa fa-chart-bar mr-2"></i>Top</a>
-                            <a href="#" class="btn btn-outline-warning px-4"><i class="fa fa-certificate mr-2"></i>New</a>
+                            <a href="#" class="btn btn-outline-danger px-4"><i class="fa fa-fire mr-2"></i>{% trans %}Hot{% endtrans %}</a>
+                            <a href="#" class="btn btn-outline-primary px-4"><i class="fa fa-chart-bar mr-2"></i>{% trans %}Top{% endtrans %}</a>
+                            <a href="#" class="btn btn-outline-warning px-4"><i class="fa fa-certificate mr-2"></i>{% trans %}New{% endtrans %}</a>
                         </div>
                     </div>
                     <ul class="timeline">
@@ -55,15 +55,15 @@
                             </br>
                             <div class="card">
                                 <div class="card-body">  <!-- SOS Frontend -->
-                                    <span>To get started, please follow a board <a class="btn btn-primary" href="{{ url('boards') }}">Browse Boards</a> </span>
+                                    <span>{% trans %}To get started, please follow a board{% endtrans %} <a class="btn btn-primary" href="{{ url('boards') }}">{% trans %}Browse Boards{% endtrans %}</a> </span>
                                 </div>
                             </div>
                         {% else %}
                             <div class="card">
                                 <div class="card-body">  <!-- SOS Frontend -->
-                                    <span>To get started, please login or register</span> 
-                                    <a href="{{ url('app_login') }}" class="btn btn-outline-primary">Login</a>
-                                    <a href="{{ url('app_register') }}" class="btn btn-primary">Register</a>
+                                    <span>{% trans %}To get started, please login or register{% endtrans %}</span> 
+                                    <a href="{{ url('app_login') }}" class="btn btn-outline-primary">{% trans %}Login{% endtrans %}</a>
+                                    <a href="{{ url('app_register') }}" class="btn btn-primary">{% trans %}Register{% endtrans %}</a>
                                 </div>
                             </div>
                         {% endif %}
@@ -73,7 +73,7 @@
                             <li class="timeline-item bg-white rounded ml-3 p-4 shadow">
                                 <div class="timeline-arrow"></div>
                                     <h2 class="post-title mb-0">
-                                        <span class="mx-2">posted <span class="post-title-highlight">{{post.createdAt |date}}</span> by {{ post.author.username }}</span>
+                                        <span class="mx-2">{% trans %}posted{% endtrans %} <span class="post-title-highlight">{{post.createdAt |date}}</span> {% trans %}by{% endtrans %} {{ post.author.username }}</span>
                                         <img src="{{ asset('/img/default/user_default_24.png') }}" class="rounded-circle shadow mr-2" alt="...">
                                         <span><a href="/u/{{post.author.username}}" class="text-dark">{{post.author.username}}</a></span>
                                     </h2>
