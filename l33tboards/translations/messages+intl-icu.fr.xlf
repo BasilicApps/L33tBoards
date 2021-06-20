@@ -185,6 +185,26 @@
         <source>BOARD TIMELINE FEED</source>
         <target>FIL D'ACTU. DU BOARD</target>
       </trans-unit>
+      <trans-unit id="pVVGIsZ" resname="Post">
+        <source>Post</source>
+        <target>__Post</target>
+      </trans-unit>
+      <trans-unit id="GbJHos7" resname="COMMENTS">
+        <source>COMMENTS</source>
+        <target>__COMMENTS</target>
+      </trans-unit>
+      <trans-unit id="thM5xzP" resname="Post Number">
+        <source>Post Number</source>
+        <target state="translated">Nombre de publications</target>
+      </trans-unit>
+      <trans-unit id="qu2GTcR" resname="Like Number">
+        <source>Like Number</source>
+        <target state="translated">Nombre de j'aime</target>
+      </trans-unit>
+      <trans-unit id="3mU_2kv" resname="Comments Number">
+        <source>Comments Number</source>
+        <target state="translated">Nombre de commentaires</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

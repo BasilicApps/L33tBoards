@@ -76,9 +76,9 @@
                 </br>
                 <div><h4>{{user.username}}</h4></div>
                 </br>
-                <div>Nombre de posts : {{user.getNbPosts()}}</div>
-                <div>Nombre de like : {{user.getScore()}}</div>
-                <div>Nombre de commentaires : {{user.getNbComments()}}</div>
+                <div>{% trans %}Post Number{% endtrans %} : {{user.getNbPosts()}}</div>
+                <div>{% trans %}Like Number{% endtrans %} : {{user.getScore()}}</div>
+                <div>{% trans %}Comments Number{% endtrans %} : {{user.getNbComments()}}</div>
             </div>
         </div>
     </div>
