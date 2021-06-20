@@ -127,3 +127,16 @@ hr.hr-text::before {
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
+.btn-thumb {
+    background-color: transparent;
+    color: #474747;
+    box-shadow: none !important;
+    border: 0 !important;
+    transition: color .4 ease-in;
+}
+.btn-thumb:hover { transition: color .4 ease-out; }
+.btn-thumb-liked { color: #2fbb64; }
+.btn-thumb-liked:hover { color: #2fbb65cc; }
+.btn-thumb-unliked { color: #e04343; }
+.btn-thumb-unliked:hover { color: #e04343cc; }
