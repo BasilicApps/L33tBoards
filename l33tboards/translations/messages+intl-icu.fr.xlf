@@ -188,6 +188,7 @@
       <trans-unit id="I8XzMXD" resname="Add a comment...">
         <source>Add a comment...</source>
         <target>Ajouter un commentaire...</target>
+      </trans-unit>
       <trans-unit id="sYx5_.L" resname="'s Posts!">
         <source>'s Posts!</source>
         <target> Posts!</target>
@@ -219,8 +220,6 @@
       <trans-unit id="FT3BOj5" resname="Post comment">
         <source>Post comment</source>
         <target>Commenter</target>
-        <source>COMMENTAIRES</source>
-        <target>COMMENTS</target>
       </trans-unit>
       <trans-unit id="thM5xzP" resname="Post Number">
         <source>Post Number</source>
