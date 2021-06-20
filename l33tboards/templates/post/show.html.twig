@@ -3,6 +3,20 @@
 {% block title %}{% trans %}Post{% endtrans %} - L33TBOARDS{% endblock %}
 
 {% block body %}
+
+<div class="card board-header">
+    <div class="row mt-4 board-header-content">
+        <div class="col-2">
+            <i class="fa fa-sticky-note" style="font-size:50px;" aria-hidden="true"></i>
+        </div>
+        <div class="col-10">
+            <h1>{{post.title}}</h2>
+        </div>
+
+        </div>
+    </div>
+</div>
+
 <div class="container">
     <div class="row mt-4">
         <div class="row mt-4">
@@ -16,7 +30,7 @@
                                 
                             </h2>
                         <div class="post-content">
-                            <h2 class="h6 my-4 post-content-title">{{post.title}}</h2>
+                            
                             <div class="text-center">
                                 {{post.content}}
                             </div>
@@ -32,11 +46,20 @@
     <div class="row mt-4">
         <div class="row mt-4">
             <ul class="timeline">
+                {% for comment in post.comments %}
                     <li class="timeline-item bg-white rounded ml-3 p-4 shadow">
                         <div class="timeline-arrow"></div>
-                        <p> @devs, we need to include the comments to keep going here</p>
+                            <span class="mx-2">{% trans %}posted{% endtrans %} 
+                                <span class="post-title-highlight">{{comment.createdAt |date}}</span> {% trans %}by{% endtrans %} <a href="/u/{{comment.author.username}}" class="text-dark">{{comment.author.username}}</a>
+                            </span>
+                            <img src="{{ asset('/img/default/user_default_24.png') }}" class="rounded-circle shadow mr-2" alt="...">
+                            </h2>
+                                <div class="post-content">
+                            <div class="text-center">
+                                {{comment.content}}
+                            </div>
                     </li>
-
+                {% endfor %}
             </ul>
         </div>
     </div>
