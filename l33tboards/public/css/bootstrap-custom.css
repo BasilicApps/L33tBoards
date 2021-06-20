@@ -29,7 +29,7 @@ body {
 
 .board-image { display:block; min-width: 6em; margin: auto; }
 .board-header { margin-bottom: 4em; padding-bottom: 2em; }
-.board-header-content { margin: 0 150px; }
+.board-header-content { margin: 0 50px; }
 
 .card-user { margin-top: 20px; min-height: 300px; }
 .user-image { min-width: 6em; }
