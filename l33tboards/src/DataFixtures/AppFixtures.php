@@ -7,6 +7,7 @@ use Doctrine\Persistence\ObjectManager;
 use App\Entity\User;
 use App\Entity\Post;
 use App\Entity\Board;
+use App\Entity\Comment;
 use Faker;
 
 class AppFixtures extends Fixture
@@ -46,6 +47,16 @@ class AppFixtures extends Fixture
                     $post->setCreatedAt($faker->dateTime());
 
                     $manager->persist($post);
+
+                    for ($c = 0; $c < 3; $c++) { //comments
+                        $com = new Comment();
+                        $com->setContent($faker->paragraph());
+                        $com->setAuthor($user);
+                        $com->setPost($post);
+                        $com->setCreatedAt($faker->dateTime());
+    
+                        $manager->persist($com);
+                    }
                 }
             }
         }

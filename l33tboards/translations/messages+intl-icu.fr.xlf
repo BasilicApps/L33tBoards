@@ -185,6 +185,34 @@
         <source>BOARD TIMELINE FEED</source>
         <target>FIL D'ACTU. DU BOARD</target>
       </trans-unit>
+      <trans-unit id="sYx5_.L" resname="'s Posts!">
+        <source>'s Posts!</source>
+        <target> Posts!</target>
+      </trans-unit>
+      <trans-unit id="c906c2Q" resname="'s Configuration!">
+        <source>'s Configuration!</source>
+        <target> Configuration!</target>
+      </trans-unit>
+      <trans-unit id="JWkxxpa" resname="FOLLOWED BOARDS">
+        <source>FOLLOWED BOARDS</source>
+        <target>BOARDS SUIVIS</target>
+      </trans-unit>
+      <trans-unit id="AvbqEoF" resname="SETTINGS">
+        <source>SETTINGS</source>
+        <target>REGLAGES</target>
+      </trans-unit>
+      <trans-unit id="T31kAXa" resname="Coming soon">
+        <source>Coming soon</source>
+        <target>En cours d'avancement</target>
+      </trans-unit>
+      <trans-unit id="pVVGIsZ" resname="Post">
+        <source>Post</source>
+        <target>Post</target>
+      </trans-unit>
+      <trans-unit id="GbJHos7" resname="COMMENTS">
+        <source>COMMENTAIRES</source>
+        <target>COMMENTS</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
