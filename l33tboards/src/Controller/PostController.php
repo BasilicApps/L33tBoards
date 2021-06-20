@@ -6,11 +6,20 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\PostRepository;
 
 use App\Form\PostFormType;
 
 class PostController extends AbstractController
 {
+    private $postRepository;
+
+    public function __construct(PostRepository $postRepository)
+    {
+        $this->postRepository = $postRepository;
+    }
+
+
     /**
      * @Route("/post", name="post")
      */
@@ -41,6 +50,19 @@ class PostController extends AbstractController
 
         return $this->render('post/index.html.twig', [
             'postForm' => $postForm->createView()
+        ]);
+    }
+
+        /**
+     * @Route("/post/{id}", name="showPost", methods={"GET"})
+     */
+    public function show(int $id): Response
+    {
+        $post = $this->postRepository->findById($id)[0];
+        dump($post);
+    
+        return $this->render('post/show.html.twig', [
+            'post' => $post
         ]);
     }
 }

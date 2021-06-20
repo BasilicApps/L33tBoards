@@ -7,14 +7,14 @@
 <div class="card board-header">
     <div class="row mt-4 board-header-content">
         <div class="col-2">
-            <img src="{{ asset('/img/default/board_default_24.png') }}" class="rounded-circle shadow mr-2 board-image" alt="...">
+            <i class="fa fa-book" style="font-size:100px;" aria-hidden="true"></i>
         </div>
         <div class="col-10">
             <h1>{% trans %}Welcome to{% endtrans %} {{board.title}}! </h1> 
             <h2>/boards/{{board.urlTitle}}</h2>
             <button type="button" class="btn btn-primary"><i class="fa fa-thumbs-up mr-2"></i></button>
             <button type="button" class="btn btn-primary"><i class="fa fa-thumbs-down mr-2"></i></button>
-        </div> <!-- Je suis toujours nul en front btw -->
+        </div>
     </div>
 </div>
 <div class="container">
@@ -36,13 +36,18 @@
                         <span class="mx-2">{% trans %}posted{% endtrans %} <span class="post-title-highlight">{{post.createdAt |date}}</span> {% trans %}by{% endtrans %}</span>
                         <img src="{{ asset('/img/default/user_default_24.png') }}" class="rounded-circle shadow mr-2" alt="...">
                         <span><a href="/u/{{post.author.username}}" class="text-dark">{{post.author.username}}</a></span>
+                        
                     </h2>
+                    <a style="color: #000000; text-decoration: none;" href="{{ url("showPost", {'id': post.id}) }}">
                 <div class="post-content">
                     <h2 class="h6 my-4 post-content-title">{{post.title}}</h2>
                     <div class="text-center">
                         {{post.content}}
                     </div>
-                </div>
+                </div></a>
+                <button type="button" class="btn btn-primary"><i class="fa fa-thumbs-up mr-1"></i></button>
+                <button type="button" class="btn btn-primary"><i class="fa fa-thumbs-down mr-1"></i></button>
+                <span class="lead">{% trans %}Dankness{% endtrans %} : {{post.score}}</span>
             </li>
             {% endfor %}
         </ul>

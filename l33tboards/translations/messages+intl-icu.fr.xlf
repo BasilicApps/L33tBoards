@@ -173,6 +173,18 @@
         <source>Search</source>
         <target>Rechercher</target>
       </trans-unit>
+      <trans-unit id="uNMehSc" resname="on">
+        <source>on</source>
+        <target>sur</target>
+      </trans-unit>
+      <trans-unit id="DmuOXFN" resname="Welcome to">
+        <source>Welcome to</source>
+        <target>Bienvenue sur</target>
+      </trans-unit>
+      <trans-unit id="ri4cOyX" resname="BOARD TIMELINE FEED">
+        <source>BOARD TIMELINE FEED</source>
+        <target>FIL D'ACTU. DU BOARD</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% trans %}Post{% endtrans %} - L33TBOARDS{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row mt-4">
+        <div class="row mt-4">
+            <ul class="timeline">
+                    <li class="timeline-item bg-white rounded ml-3 p-4 shadow">
+                        <div class="timeline-arrow"></div>
+                            <h2 class="post-title mb-0">
+                                <span class="mx-2">{% trans %}posted{% endtrans %} <span class="post-title-highlight">{{post.createdAt |date}}</span> {% trans %}by{% endtrans %}</span>
+                                <img src="{{ asset('/img/default/user_default_24.png') }}" class="rounded-circle shadow mr-2" alt="...">
+                                <span><a href="/u/{{post.author.username}}" class="text-dark">{{post.author.username}}</a></span>
+                                
+                            </h2>
+                        <div class="post-content">
+                            <h2 class="h6 my-4 post-content-title">{{post.title}}</h2>
+                            <div class="text-center">
+                                {{post.content}}
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-primary"><i class="fa fa-thumbs-up mr-1"></i></button>
+                        <button type="button" class="btn btn-primary"><i class="fa fa-thumbs-down mr-1"></i></button>
+                        <span class="lead">{% trans %}Dankness{% endtrans %} : {{post.score}}</span>
+                    </li>
+            </ul>
+        </div>
+    </div>
+    <hr data-content="{% trans %}COMMENTS{% endtrans %}" class="hr-text">
+    <div class="row mt-4">
+        <div class="row mt-4">
+            <ul class="timeline">
+                    <li class="timeline-item bg-white rounded ml-3 p-4 shadow">
+                        <div class="timeline-arrow"></div>
+                        <p> @devs, we need to include the comments to keep going here</p>
+                    </li>
+
+            </ul>
+        </div>
+    </div>
+        <div class="col-4" style="margin-top:20px">
+            <!-- Right part: TOP + infos + footer -->
+            {% include 'layout/footer.html.twig' %}
+        </div>
+    </div>
+</div>
+{% endblock %}

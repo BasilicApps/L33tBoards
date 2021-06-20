@@ -46,20 +46,24 @@
                 <ul class="timeline">
                     {% for post in user.posts %} <!-- ça sera à changer, pour l'instant ça va car on a que quelque posts -->
                     <li class="timeline-item bg-white rounded ml-3 p-4 shadow">
-                        <div class="timeline-arrow"></div>
-                            <h2 class="post-title mb-0">
-                                <span class="mx-2"><a href="/boards/{{post.board.urlTitle}}" class="text-dark">{{post.board.title}}</a></span>
-                                <span class="mx-2">{% trans %}posted{% endtrans %} <span class="post-title-highlight">10 hours ago</span> {% trans %}by{% endtrans %}</span>
-                                <img src="{{ asset('/img/default/user_default_24.png') }}" class="rounded-circle shadow mr-2" alt="...">
-                                <span><a href="/u/{{post.author.username}}" class="text-dark">{{post.author.username}}</a></span>
-                            </h2>
-                        <div class="post-content">
-                            <h2 class="h6 my-4 post-content-title">{{post.title}}</h2>
-                            <div class="text-center">
-                                {{post.content}}
-                            </div>
-                        </div>
-                    </li>
+                                <div class="timeline-arrow"></div>
+                                    <h2 class="post-title mb-0">
+                                        <span class="mx-2">{% trans %}posted{% endtrans %} 
+                                            <span class="post-title-highlight">{{post.createdAt |date}}</span> {% trans %}by{% endtrans %} <a href="/u/{{post.author.username}}" class="text-dark">{{post.author.username}}</a>
+                                            
+                                        </span>
+                                        <img src="{{ asset('/img/default/user_default_24.png') }}" class="rounded-circle shadow mr-2" alt="...">
+                                        <span></span>
+                                        <span>{% trans %}on{% endtrans %} <a href="/boards/{{post.board.urlTitle}}">{{post.board.title}} </a></span>
+                                    </h2>
+                                <a style="color: #000000; text-decoration: none;" href="{{ url("showPost", {'id': post.id}) }}">
+                                <div class="post-content">
+                                    <h2 class="h6 my-4 post-content-title">{{post.title}}</h2>
+                                    <div class="text-center">
+                                        {{post.content}}
+                                    </div>
+                                </div></a>
+                            </li>
                     {% endfor %}
                 </ul>
             </div>
