@@ -12,6 +12,7 @@ class UserController extends AbstractController
 {
 
     private $userRepository;
+    private $boards;
 
 
     public function __construct(UserRepository $userRepository)
@@ -28,6 +29,25 @@ class UserController extends AbstractController
         $user = $this->getUser();
         return $this->render('user/index.html.twig', [
             'user' => $user,
+        ]);
+    }
+
+        /**
+     * @Route("/u/profil/{username}", name="profileUser")
+     */
+    public function profile(User $user): Response
+    {
+    	$this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
+        if($this->getUser() != null){
+            $this->boards = $this->getUser()->getFollowedBoards();
+            dump($this->getUser());
+        }else{
+            $this->boards = null;
+        }
+        return $this->render('user/profile.html.twig', [
+            'user' => $user,
+            'boards' => $this->boards
         ]);
     }
 

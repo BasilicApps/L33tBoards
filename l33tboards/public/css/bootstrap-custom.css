@@ -29,7 +29,7 @@ body {
 
 .board-image { display:block; min-width: 6em; margin: auto; }
 .board-header { margin-bottom: 4em; padding-bottom: 2em; }
-.board-header-content { margin: 0 150px; }
+.board-header-content { margin: 0 50px; }
 
 .card-user { margin-top: 20px; min-height: 300px; }
 .user-image { min-width: 6em; }
@@ -127,3 +127,16 @@ hr.hr-text::before {
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
+.btn-thumb {
+    background-color: transparent;
+    color: #474747;
+    box-shadow: none !important;
+    border: 0 !important;
+    transition: color .4 ease-in;
+}
+.btn-thumb:hover { transition: color .4 ease-out; }
+.btn-thumb-liked { color: #2fbb64; }
+.btn-thumb-liked:hover { color: #2fbb65cc; }
+.btn-thumb-unliked { color: #e04343; }
+.btn-thumb-unliked:hover { color: #e04343cc; }
