@@ -1,25 +1,25 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Post{% endblock %}
+{% block title %}{% trans %}New Post{% endtrans %}{% endblock %}
 
 {% block body %}
-<hr data-content="CREATE POST" class="hr-text mt-5">
+<hr data-content="{% trans %}CREATE POST{% endtrans %}" class="hr-text mt-5">
 <div class="container card mt-4 p-4">
     {% if app.user %}
         {% if app.user.followedBoards is empty %}
-            <div class="alert alert-danger">You need to follow at least one board to post! Please, <a href="{{ url('boards') }}">follow a board</a>.</div>
+            <div class="alert alert-danger">{% trans %}You need to follow at least one board to post! Please,{% endtrans %} <a href="{{ url('boards') }}">{% trans %}follow a board{% endtrans %}</a>.</div>
         {% else %}
             {{ form_start(postForm) }}
                 {{  form_row(postForm.board) }}
                 {{  form_row(postForm.title) }}
                 {{  form_row(postForm.content) }}
                 <button class="btn btn-primary mt-4" type="submit">
-                    Create Post
+                    {% trans %}Create Post{% endtrans %}
                 </button>
             {{  form_end(postForm) }}
         {% endif %}
     {% else %}
-        <div class="alert alert-danger">You must be logged in to create a new post! Please, <a href="{{ url('app_login') }}">log in</a>.</div>
+        <div class="alert alert-danger">{% trans %}You must be logged in to create a new post! Please,{% endtrans %} <a href="{{ url('app_login') }}">{% trans %}log in{% endtrans %}</a>.</div>
     {% endif %}
 </div>
 {% endblock %}

@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" target-language="fr" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="4oWf8Lg" resname="My Feed">
+        <source>My Feed</source>
+        <target>Mon fil d'actualité</target>
+      </trans-unit>
+      <trans-unit id="DwXOFM1" resname="To get started, please follow a board">
+        <source>To get started, please follow a board</source>
+        <target>Pour démarrer, veuillez suivre un board</target>
+      </trans-unit>
+      <trans-unit id="X6qIgAo" resname="Browse Boards">
+        <source>Browse Boards</source>
+        <target>Parcourir les boards</target>
+      </trans-unit>
+      <trans-unit id="mbVm9kI" resname="To get started, please login or register">
+        <source>To get started, please login or register</source>
+        <target>Pour démarrer, veuillez vous connecter ou créer un compte</target>
+      </trans-unit>
+      <trans-unit id="nWMiwfT" resname="Login">
+        <source>Login</source>
+        <target>Connexion</target>
+      </trans-unit>
+      <trans-unit id="u3I07BJ" resname="Register">
+        <source>Register</source>
+        <target>Créer un compte</target>
+      </trans-unit>
+      <trans-unit id="FjfMaD1" resname="posted">
+        <source>posted</source>
+        <target>posté</target>
+      </trans-unit>
+      <trans-unit id="p_LSbo0" resname="by">
+        <source>by</source>
+        <target>par</target>
+      </trans-unit>
+      <trans-unit id="T8053ZJ" resname="Boards">
+        <source>Boards</source>
+        <target>Boards</target>
+      </trans-unit>
+      <trans-unit id="pzmjld5" resname="Dankness">
+        <source>Dankness</source>
+        <target>Dankness</target>
+      </trans-unit>
+      <trans-unit id="hPAQY48" resname="unfollow">
+        <source>unfollow</source>
+        <target>Ne plus suivre</target>
+      </trans-unit>
+      <trans-unit id="o84LYQb" resname="follow">
+        <source>follow</source>
+        <target>Suivre</target>
+      </trans-unit>
+      <trans-unit id="NZvVw5N" resname="TOP TRENDINGS">
+        <source>TOP TRENDINGS</source>
+        <target>TOP BOARDS</target>
+      </trans-unit>
+      <trans-unit id="Kw8LAaU" resname="YOUR TIMELINE FEED">
+        <source>YOUR TIMELINE FEED</source>
+        <target>VOTRE FIL D'ACTU</target>
+      </trans-unit>
+      <trans-unit id="DsU4lNA" resname="Hot">
+        <source>Hot</source>
+        <target>Meilleur</target>
+      </trans-unit>
+      <trans-unit id="1c389.9" resname="Top">
+        <source>Top</source>
+        <target>Top</target>
+      </trans-unit>
+      <trans-unit id="GP3VSbL" resname="New">
+        <source>New</source>
+        <target>Nouveau</target>
+      </trans-unit>
+      <trans-unit id="mRv6AVU" resname="My Profile">
+        <source>My Profile</source>
+        <target>Mon profil</target>
+      </trans-unit>
+      <trans-unit id="3WkOIrH" resname="My Posts">
+        <source>My Posts</source>
+        <target>Mes posts</target>
+      </trans-unit>
+      <trans-unit id="fhsNVkH" resname="Account">
+        <source>Account</source>
+        <target>Mon compte</target>
+      </trans-unit>
+      <trans-unit id="0FJ_Sz1" resname="Logout">
+        <source>Logout</source>
+        <target>Déconnexion</target>
+      </trans-unit>
+      <trans-unit id="IgckYvn" resname="New Post">
+        <source>New Post</source>
+        <target>Créer un poste</target>
+      </trans-unit>
+      <trans-unit id="g4incQa" resname="CREATE POST">
+        <source>CREATE POST</source>
+        <target>CRÉER UN POST</target>
+      </trans-unit>
+      <trans-unit id="ePT9O7B" resname="You need to follow at least one board to post! Please,">
+        <source>You need to follow at least one board to post! Please,</source>
+        <target>Vous devez suivre au moins un board pour poster! Veuillez</target>
+      </trans-unit>
+      <trans-unit id="YwNe_Zq" resname="follow a board">
+        <source>follow a board</source>
+        <target>Suivre un board</target>
+      </trans-unit>
+      <trans-unit id="EQpEGOT" resname="Create a new post">
+        <source>Create a new post</source>
+        <target>Créer un post</target>
+      </trans-unit>
+      <trans-unit id="GqoBGOL" resname="Select Board">
+        <source>Select Board</source>
+        <target>Choisir un board</target>
+      </trans-unit>
+      <trans-unit id="jl4ZHeE" resname="Post Title">
+        <source>Post Title</source>
+        <target>Titre du post</target>
+      </trans-unit>
+      <trans-unit id="FYbuzda" resname="Post Content">
+        <source>Post Content</source>
+        <target>Contenu du post</target>
+      </trans-unit>
+      <trans-unit id="gMZJESF" resname="Create Post">
+        <source>Create Post</source>
+        <target>Créer un post</target>
+      </trans-unit>
+      <trans-unit id="Hx2Pq_2" resname="You must be logged in to create a new post! Please,">
+        <source>You must be logged in to create a new post! Please,</source>
+        <target>Vous devez être connecté pour créer un post! Veuillez</target>
+      </trans-unit>
+      <trans-unit id="fwNIweL" resname="log in">
+        <source>log in</source>
+        <target>connexion</target>
+      </trans-unit>
+      <trans-unit id="yKeA0.P" resname="Log in!">
+        <source>Log in!</source>
+        <target>Connexion</target>
+      </trans-unit>
+      <trans-unit id="acVpEs4" resname="You are logged in as">
+        <source>You are logged in as</source>
+        <target>Vous êtes connecté en tant que</target>
+      </trans-unit>
+      <trans-unit id="dDUw20Q" resname="Please sign in">
+        <source>Please sign in</source>
+        <target>Veuillez vous connecter</target>
+      </trans-unit>
+      <trans-unit id="47ienTP" resname="Username">
+        <source>Username</source>
+        <target>Nom d'utilisateur</target>
+      </trans-unit>
+      <trans-unit id="588_9PF" resname="Password">
+        <source>Password</source>
+        <target>Mot de passe</target>
+      </trans-unit>
+      <trans-unit id="v9QCsvb" resname="Sign in">
+        <source>Sign in</source>
+        <target>Connexion</target>
+      </trans-unit>
+      <trans-unit id="vkTP6bH" resname="'s Page!">
+        <source>'s Page!</source>
+        <target> - PAGE</target>
+      </trans-unit>
+      <trans-unit id="cO3BC1O" resname="USER TIMELINE FEED">
+        <source>USER TIMELINE FEED</source>
+        <target>FIL D'ACTU. UTILISATEUR</target>
+      </trans-unit>
+      <trans-unit id="7ym2u9A" resname="You haven't posted anything yet, right ?">
+        <source>You haven't posted anything yet, right ?</source>
+        <target>T'as rien posté, gros schlagos.</target>
+      </trans-unit>
+      <trans-unit id="ScJmuqq" resname="Search">
+        <source>Search</source>
+        <target>Rechercher</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

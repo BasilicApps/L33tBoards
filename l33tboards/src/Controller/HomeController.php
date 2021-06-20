@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use App\Repository\PostRepository;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -36,5 +37,14 @@ class HomeController extends AbstractController
 
 
         ]);
+    }
+
+    /**
+     * @Route("/language/{locale}", name="updateLocale")
+     */
+    public function updateLocale($locale, Request $request) {
+        $request->getSession()->set('_locale', $locale);
+        $request->setLocale($locale);
+        return $this->redirect($request->headers->get('referer'));
     }
 }

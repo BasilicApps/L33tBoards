@@ -10,7 +10,7 @@
             <img src="{{ asset('/img/default/user_default_24.png') }}" class="rounded-circle shadow mr-2 board-image" alt="...">
         </div>
         <div class="col-10">
-            <h1>{{user.username}}'s Page!</h1>
+            <h1>{{user.username}}{% trans %}'s Page!{% endtrans %}</h1>
         </div>
     </div>
 </div>
@@ -18,12 +18,12 @@
     <div class="row">
         <div class="col-md-8">
             <!-- Timeline -->
-            <hr data-content="USER TIMELINE FEED" class="hr-text">
+            <hr data-content="{% trans %}USER TIMELINE FEED{% endtrans %}" class="hr-text">
             <div class="card">
                 <div class="card-body p-2">
-                    <a href="#" class="btn btn-outline-danger px-4"><i class="fa fa-fire mr-2"></i>Hot</a>
-                    <a href="#" class="btn btn-outline-primary px-4"><i class="fa fa-chart-bar mr-2"></i>Top</a>
-                    <a href="#" class="btn btn-outline-warning px-4"><i class="fa fa-certificate mr-2"></i>New</a>
+                    <a href="#" class="btn btn-outline-danger px-4"><i class="fa fa-fire mr-2"></i>{% trans %}Hot{% endtrans %}</a>
+                    <a href="#" class="btn btn-outline-primary px-4"><i class="fa fa-chart-bar mr-2"></i>{% trans %}Top{% endtrans %}</a>
+                    <a href="#" class="btn btn-outline-warning px-4"><i class="fa fa-certificate mr-2"></i>{% trans %}New{% endtrans %}</a>
                 </div>
             </div>
             {% if user.posts is empty %}
@@ -31,7 +31,7 @@
                     <div class="card">
                         <div class="card-body p-2 text-center">
                             <img src="{{ asset('/img/schlagos.jpg') }}" class="shadow" alt="ayayou">
-                            <p>T'as rien posté, gros schlagos.</p>
+                            <p>{% trans %}You haven't posted anything yet, right ?{% endtrans %}</p>
                         </div>
                     </div>
                 {% else %}
@@ -49,7 +49,7 @@
                         <div class="timeline-arrow"></div>
                             <h2 class="post-title mb-0">
                                 <span class="mx-2"><a href="/boards/{{post.board.urlTitle}}" class="text-dark">{{post.board.title}}</a></span>
-                                <span class="mx-2">posted <span class="post-title-highlight">10 hours ago</span> by</span>
+                                <span class="mx-2">{% trans %}posted{% endtrans %} <span class="post-title-highlight">10 hours ago</span> {% trans %}by{% endtrans %}</span>
                                 <img src="{{ asset('/img/default/user_default_24.png') }}" class="rounded-circle shadow mr-2" alt="...">
                                 <span><a href="/u/{{post.author.username}}" class="text-dark">{{post.author.username}}</a></span>
                             </h2>

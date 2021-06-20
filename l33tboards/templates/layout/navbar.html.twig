@@ -10,33 +10,47 @@
                 <div class="input-group-prepend">
                     <button id="button-addon2" type="submit" class="btn btn-link text-warning"><i class="fa fa-search"></i></button>
                 </div>
-                <input type="search" placeholder="Search..." aria-describedby="button-addon2" class="form-control form-search-box border-0 bg-light">
+                <input type="search" placeholder="{% trans %}Search{% endtrans %}..." aria-describedby="button-addon2" class="form-control form-search-box border-0 bg-light">
             </div>
             
         </div>
         
     </div>
-    <a class="btn btn-primary" href="{{ url('boards') }}">Browse Boards</a>
-    <div class="text-right">
+    <a class="btn btn-primary" href="{{ url('boards') }}">{% trans %}Browse Boards{% endtrans %}</a>
+    <div class="text-right d-flex">
         {% if app.user %}
-            <div class="btn-group">
+            <div class="btn-group mr-2">
                 <button type="button" class="btn btn-primary"><i class="fa fa-user mr-2"></i> {{ app.user.getUsername() }}</button>
                 <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="sr-only">Toggle Dropdown</span>
+                    <span class="sr-only"></span>
                 </button>
                 <div class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" href="#">My Profile</a>
-                    <a class="dropdown-item" href="/u/{{app.user.username}}">My Posts</a>
-                    <a class="dropdown-item" href="#">Account</a>
+                    <a class="dropdown-item" href="#">{% trans %}My Profile{% endtrans %}</a>
+                    <a class="dropdown-item" href="/u/{{app.user.username}}">{% trans %}My Posts{% endtrans %}</a>
+                    <a class="dropdown-item" href="#">{% trans %}Account{% endtrans %}</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="{{ url('app_logout') }}">Logout</a>
+                    <a class="dropdown-item" href="{{ url('app_logout') }}">{% trans %}Logout{% endtrans %}</a>
                 </div>
             </div>
-            <a href="{{ url('app_logout') }}" class="btn btn-danger"><i class="fa fa-power-off"></i></a>
+            <a href="{{ url('app_logout') }}" class="btn btn-danger mr-2"><i class="fa fa-power-off"></i></a>
         {% else %}
-            <a href="{{ url('app_login') }}" class="btn btn-outline-primary">Login</a>
-            <a href="{{ url('app_register') }}" class="btn btn-primary">Register</a>
+            <a href="{{ url('app_login') }}" class="btn btn-outline-primary mr-2">{% trans %}Login{% endtrans %}</a>
+            <a href="{{ url('app_register') }}" class="btn btn-primary mr-2">{% trans %}Register{% endtrans %}</a>
         {% endif %}
+        <div class="dropdown">
+            <button class="btn btn-dark dropdown-toggle" type="button" id="languageDropdownBtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {% set userCurrentLocale = app.session.get('_locale') %}
+                <img src="{{ asset('/img/locales/'~ userCurrentLocale ~'.png') }}" alt="{{ userCurrentLocale }}" width="24">
+            </button>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="languageDropdownBtn">
+                {% for locale in locales %}
+                    <a class="dropdown-item" href="{{ path('updateLocale', {'locale': locale}) }}">
+                        <img class="mr-2" src="{{ asset('/img/locales/'~ locale ~'.png') }}" alt="{{ locale }}" width="32">
+                        {{ locale | upper }}
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
     </div>
 </nav>
 {% endblock %}
