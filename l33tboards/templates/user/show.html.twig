@@ -73,7 +73,12 @@
                 <div>
                     <img src="{{ asset('/img/default/user_default_24.png') }}" class="rounded-circle shadow mr-2 user-image" alt="...">
                 </div>
-                <div>{{user.username}}</div>
+                </br>
+                <div><h4>{{user.username}}</h4></div>
+                </br>
+                <div>Nombre de posts : {{user.getNbPosts()}}</div>
+                <div>Nombre de like : {{user.getScore()}}</div>
+                <div>Nombre de commentaires : {{user.getNbComments()}}</div>
             </div>
         </div>
     </div>
