@@ -5,31 +5,37 @@
 {% block body %}
 <div class="container">
         <div class="col-8" style="margin-top:20px">
+        <ul class="timeline">
             {% for board in boards %}
-                <a href="{{ url("showBoard", {'urlTitle': board.urlTitle}) }}">
-                    <div class="jumbotron jumbotron-fluid">
-                        <div class="container">
-                            <h1 class="display-4">{{ board.urlTitle}}</h1>
+                <a style="color: #000000; text-decoration: none;" href="{{ url("showBoard", {'urlTitle': board.urlTitle}) }}">
+                    <li class="timeline-item bg-white rounded ml-3 p-4 shadow">
+                    <div class="timeline-arrow"></div>
+                        <h1 class="display-4"><i class="fa fa-book" style="font-size:50px;" aria-hidden="true"></i>{{ board.urlTitle|length > 10 ? board.urlTitle|slice(0, 10  ) ~ '...' }}</h1>
+                        <span>
                             <p class="lead">{% trans %}Dankness{% endtrans %} : {{board.score}}</p>
-                            {% if app.user != null %} 
-                                {% if board in app.user.followedBoards %}
-                                    <a href="{{url("unFollow", {'urlTitle': board.urlTitle}) }}">
-                                        <button type="button" class="btn btn-danger">{% trans %}unfollow{% endtrans %}</button>
-                                    </a>
-                                {% else %}
-                                    <a href="{{url("follow", {'urlTitle': board.urlTitle}) }}">
-                                        <button type="button" class="btn btn-primary">{% trans %}follow{% endtrans %}</button>
-                                    </a>
-                                {% endif %}
+                            <button type="button" class="btn btn-primary"><i class="fa fa-thumbs-up mr-1"></i></button>
+                            <button type="button" class="btn btn-primary"><i class="fa fa-thumbs-down mr-1"></i></button>
+                        </span>
+                        {% if app.user != null %} 
+                            {% if board in app.user.followedBoards %}
+                                <a href="{{url("unFollow", {'urlTitle': board.urlTitle}) }}">
+                                    <button type="button" class="btn btn-danger">{% trans %}unfollow{% endtrans %}</button>
+                                </a>
+                            {% else %}
+                                <a href="{{url("follow", {'urlTitle': board.urlTitle}) }}">
+                                    <button type="button" class="btn btn-primary">{% trans %}follow{% endtrans %}</button>
+                                </a>
                             {% endif %}
-                        </div>
-                    </div>
+                        {% endif %} 
+                    </li>
                 </a>
             {% endfor %}
+            </ul>
         </div>
         <div class="col-4" style="margin-top:20px">
             <!-- Right part: TOP + infos + footer -->
             {% include 'layout/footer.html.twig' %}
         </div>
     </div>
+</div>
 {% endblock %}

@@ -80,12 +80,13 @@
                                         <img src="{{ asset('/img/default/user_default_24.png') }}" class="rounded-circle shadow mr-2" alt="...">
                                         <span>{% trans %}on{% endtrans %} <a href="/boards/{{post.board.urlTitle}}">{{post.board.title}} </a></span>
                                     </h2>
+                                <a style="color: #000000; text-decoration: none;" href="{{ url("showPost", {'id': post.id}) }}"> 
                                 <div class="post-content">
                                     <h2 class="h6 my-4 post-content-title">{{post.title}}</h2>
                                     <div class="text-center">
                                         {{post.content}}
                                     </div>
-                                </div>
+                                </div></a>
                             </li>
                             {% endfor %}
                         {% endfor %}
