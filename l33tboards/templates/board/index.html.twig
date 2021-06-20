@@ -14,11 +14,11 @@
             </div>
         {% endif %}
         <ul class="timeline">
-            {% for board in boards %}
+            {% for board in boards|reverse %}
                 <a style="color: #000000; text-decoration: none;" href="{{ url("showBoard", {'urlTitle': board.urlTitle}) }}">
                     <li class="timeline-item bg-white rounded ml-3 p-4 shadow">
                     <div class="timeline-arrow"></div>
-                        <h1 class="display-4"><i class="fa fa-book mr-4" style="font-size:50px;" aria-hidden="true"></i><span style="overflow-wrap:anywhere;text-overflow:ellipsis;">{{ board.urlTitle|length > 10 ? board.urlTitle|slice(0, 10) ~ '...' : board.urlTitle }}</span></h1>
+                        <h1 class="display-4"><i class="fa fa-book mr-4" style="font-size:50px;" aria-hidden="true"></i><span style="overflow-wrap:anywhere;text-overflow:ellipsis;">{{ board.title|length > 10 ? board.title|slice(0, 10) ~ '...' : board.title }}</span></h1>
                         <span>
                             <p class="lead">{% trans %}Dankness{% endtrans %} : {{board.score}}</p>
                             <a href="#" class="btn btn-thumb"><i class="fa fa-thumbs-up mr-1"></i></button>

@@ -233,6 +233,26 @@
         <source>Comments Number</source>
         <target state="translated">Nombre de commentaires</target>
       </trans-unit>
+      <trans-unit id="krc.zdY" resname="Public board">
+        <source>Public board</source>
+        <target>Board publique</target>
+      </trans-unit>
+      <trans-unit id="Urr8caL" resname="New Board">
+        <source>New Board</source>
+        <target>Nouveau board</target>
+      </trans-unit>
+      <trans-unit id="qhEt4pK" resname="CREATE BOARD">
+        <source>CREATE BOARD</source>
+        <target>CREATION DE BOARD</target>
+      </trans-unit>
+      <trans-unit id="1rFRjFD" resname="Create Board">
+        <source>Create Board</source>
+        <target>Créer board</target>
+      </trans-unit>
+      <trans-unit id="1DlXqXh" resname="You must be logged in to create a new board! Please,">
+        <source>You must be logged in to create a new board! Please,</source>
+        <target>Vous devez être connecté pour créer un board! Veuillez</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% trans %}New Board{% endtrans %}{% endblock %}
+
+{% block body %}
+<hr data-content="{% trans %}CREATE BOARD{% endtrans %}" class="hr-text mt-5">
+<div class="container card mt-4 p-4">
+    {% if app.user %}
+        {{ form_start(boardForm) }}
+            {{  form_row(boardForm.title) }}
+            {{  form_row(boardForm.visibility) }}
+            <button class="btn btn-primary mt-4" type="submit">
+                {% trans %}Create Board{% endtrans %}
+            </button>
+        {{  form_end(boardForm) }}
+    {% else %}
+        <div class="alert alert-danger">{% trans %}You must be logged in to create a new board! Please,{% endtrans %} <a href="{{ url('app_login') }}">{% trans %}log in{% endtrans %}</a>.</div>
+    {% endif %}
+</div>
+{% endblock %}
