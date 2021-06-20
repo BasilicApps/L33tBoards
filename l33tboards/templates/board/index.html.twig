@@ -4,37 +4,32 @@
 
 {% block body %}
 <div class="container">
-
-    <div class="row mt-4">
-    {% for board in boards %}
-        <div class="col-8">
-            <a href="{{ url("showBoard", {'urlTitle': board.urlTitle}) }}">  <!-- TODO, je pue la chiasse en front-->
-                <li class="timeline-item bg-white rounded ml-3 p-4 shadow">
-                    <div class="timeline-arrow"></div>
-                        <h2 class="post-title mb-0">
-                            <h1><spanclass="text-dark">{{board.title}}</span></h1>
-                            <span class="ml-3">{% trans %}Dankness{% endtrans %} : {{board.score}}</span>
+        <div class="col-8" style="margin-top:20px">
+            {% for board in boards %}
+                <a href="{{ url("showBoard", {'urlTitle': board.urlTitle}) }}">
+                    <div class="jumbotron jumbotron-fluid">
+                        <div class="container">
+                            <h1 class="display-4">{{ board.urlTitle}}</h1>
+                            <p class="lead">{% trans %}Dankness{% endtrans %} : {{board.score}}</p>
                             {% if app.user != null %} 
                                 {% if board in app.user.followedBoards %}
                                     <a href="{{url("unFollow", {'urlTitle': board.urlTitle}) }}">
-                                        <button type="button" class="btn btn-danger">{% trans %}unfollow{% endtrans %}</button> <!-- Je suis toujours nul en front btw -->
+                                        <button type="button" class="btn btn-danger">{% trans %}unfollow{% endtrans %}</button>
                                     </a>
                                 {% else %}
                                     <a href="{{url("follow", {'urlTitle': board.urlTitle}) }}">
-                                        <button type="button" class="btn btn-primary">{% trans %}follow{% endtrans %}</button> <!-- Je suis toujours nul en front btw -->
+                                        <button type="button" class="btn btn-primary">{% trans %}follow{% endtrans %}</button>
                                     </a>
                                 {% endif %}
                             {% endif %}
-                        </h2>   
+                        </div>
                     </div>
-                </li>
-            </a>   
+                </a>
+            {% endfor %}
         </div>
-    {% endfor %}
         <div class="col-4" style="margin-top:20px">
             <!-- Right part: TOP + infos + footer -->
             {% include 'layout/footer.html.twig' %}
         </div>
     </div>
-</div>
 {% endblock %}
