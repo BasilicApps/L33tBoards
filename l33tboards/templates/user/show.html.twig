@@ -4,17 +4,17 @@
 
 {% block body %}
 
-<div class="card board-header">
-    <div class="row mt-4 board-header-content">
-        <div class="col-2">
-            <img src="{{ asset('/img/default/user_default_24.png') }}" class="rounded-circle shadow mr-2 board-image" alt="...">
-        </div>
-        <div class="col-10">
-            <h1>{{user.username}}{% trans %}'s Page!{% endtrans %}</h1>
+
+<div class="container">
+    <div class="card rounded-0 board-header">
+        <div class="row mt-4 board-header-content">
+            <div class="col-12 d-flex align-items-center justify-content-center">
+                <img src="{{ asset('/img/default/user_default_big.png') }}" width="100px" class="rounded-circle shadow mr-4" alt="User">
+                <h1>{{user.username}}{% trans %}'s Page!{% endtrans %}</h1>
+            </div>
+
         </div>
     </div>
-</div>
-<div class="container">
     <div class="row">
         <div class="col-md-8">
             <!-- Timeline -->
@@ -31,7 +31,7 @@
                     <div class="card">
                         <div class="card-body p-2 text-center">
                             <img src="{{ asset('/img/schlagos.jpg') }}" class="shadow" alt="ayayou">
-                            <p>{% trans %}You haven't posted anything yet, right ?{% endtrans %}</p>
+                            <p class="mt-4">{% trans %}You haven't posted anything yet, right ?{% endtrans %}</p>
                         </div>
                     </div>
                 {% else %}
@@ -45,36 +45,63 @@
             <div class="row mt-4">
                 <ul class="timeline">
                     {% for post in user.posts %} <!-- ça sera à changer, pour l'instant ça va car on a que quelque posts -->
-                    <li class="timeline-item bg-white rounded ml-3 p-4 shadow">
-                                <div class="timeline-arrow"></div>
-                                    <h2 class="post-title mb-0">
-                                        <span class="mx-2">{% trans %}posted{% endtrans %} 
-                                            <span class="post-title-highlight">{{post.createdAt |date}}</span> {% trans %}by{% endtrans %} <a href="/u/{{post.author.username}}" class="text-dark">{{post.author.username}}</a>
-                                            
-                                        </span>
-                                        <img src="{{ asset('/img/default/user_default_24.png') }}" class="rounded-circle shadow mr-2" alt="...">
-                                        <span></span>
-                                        <span>{% trans %}on{% endtrans %} <a href="/boards/{{post.board.urlTitle}}">{{post.board.title}} </a></span>
-                                    </h2>
-                                <a style="color: #000000; text-decoration: none;" href="{{ url("showPost", {'id': post.id}) }}">
+                        <li class="timeline-item bg-white rounded ml-3 p-4 shadow">
+                            <div class="timeline-arrow"></div>
+                            <h2 class="post-title mb-0">
+                                <span class="mr-2">{% trans %}posted{% endtrans %} 
+                                    <span class="post-title-highlight">{{post.createdAt |date}}</span> {% trans %}by{% endtrans %} <a href="/u/{{post.author.username}}" class="text-dark">{{post.author.username}}</a>
+                                </span>
+                                <img src="{{ asset('/img/default/user_default_24.png') }}" class="rounded-circle shadow mr-2" alt="...">
+                                <span></span>
+                                <span>{% trans %}on{% endtrans %} <a href="/boards/{{post.board.urlTitle}}">{{post.board.title}} </a></span>
+                            </h2>
+                            <a style="color: #000000; text-decoration: none;" href="{{ url("showPost", {'id': post.id}) }}">
                                 <div class="post-content">
                                     <h2 class="h6 my-4 post-content-title">{{post.title}}</h2>
                                     <div class="text-center">
                                         {{post.content}}
                                     </div>
-                                </div></a>
-                            </li>
+                                </div>
+                            </a>
+                        </li>
                     {% endfor %}
                 </ul>
             </div>
+            <hr data-content="{% trans %}COMMENTS{% endtrans %}" class="hr-text"></br>
+
+                                    <ul class="timeline">
+                            {% for comment in user.comments %}
+                                <li class="timeline-item bg-white rounded ml-3 p-4 shadow">
+                                    <div class="timeline-arrow"></div>
+                                    <span class="mx-2">
+                                        {% trans %}
+                                        posted
+                                        {% endtrans %}
+                                        <span class="post-title-highlight">
+                                            {{ comment.createdAt |date }}
+                                        </span>
+                                        {% trans %}
+                                        by
+                                        {% endtrans %}
+                                        <a href="/u/{{ comment.author.username }}" class="text-dark">
+                                            {{ comment.author.username }}
+                                        </a>
+                                    </span>
+                                    <img src="{{ asset('/img/default/user_default_24.png') }}" class="rounded-circle shadow mr-2" alt="..."></h2>
+                                    <div class="post-content">
+                                        <div class="text-center">
+                                            {{ comment.content }}
+                                        </div>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        
+
         </div>
         <div class="col-md-4 col-none">
-            <div class="card text-center card-user">
-                <div>
-                    <img src="{{ asset('/img/default/user_default_24.png') }}" class="rounded-circle shadow mr-2 user-image" alt="...">
-                </div>
-                </br>
-                <div><h4>{{user.username}}</h4></div>
+            <div class="card p-4 d-flex align-items-center flex-column text-center card-user">
+                <img src="{{ asset('/img/default/user_default_big.png') }}" width="100px" class="rounded-circle shadow user-image" alt="...">
+                <h4 class="mt-4">{{user.username}}</h4>
                 </br>
                 <div>{% trans %}Post Number{% endtrans %} : {{user.getNbPosts()}}</div>
                 <div>{% trans %}Like Number{% endtrans %} : {{user.getScore()}}</div>
