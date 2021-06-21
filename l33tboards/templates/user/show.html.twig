@@ -102,6 +102,10 @@
             <div class="card p-4 d-flex align-items-center flex-column text-center card-user">
                 <img src="{{ asset('/img/default/user_default_big.png') }}" width="100px" class="rounded-circle shadow user-image" alt="...">
                 <h4 class="mt-4">{{user.username}}</h4>
+                </br>
+                <div>{% trans %}Post Number{% endtrans %} : {{user.getNbPosts()}}</div>
+                <div>{% trans %}Like Number{% endtrans %} : {{user.getScore()}}</div>
+                <div>{% trans %}Comments Number{% endtrans %} : {{user.getNbComments()}}</div>
             </div>
         </div>
     </div>

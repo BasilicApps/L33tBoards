@@ -10,6 +10,8 @@ use App\Entity\Board;
 use App\Repository\BoardRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
+use App\Form\BoardFormType;
+
 class BoardController extends AbstractController
 {
 
@@ -19,7 +21,7 @@ class BoardController extends AbstractController
     public function __construct(BoardRepository $boardRepository)
     {
         $this->boardRepository = $boardRepository;
-        $this->boards = $this->boardRepository->findLast(10);
+        $this->boards = $this->boardRepository->findAll();
     }
 
     /**
@@ -175,6 +177,38 @@ class BoardController extends AbstractController
     
         return $this->render('board/show.html.twig', [
             'board' => $board
+        ]);
+    }
+
+    /**
+     * @Route("/newboard", name="createBoard")
+     */
+    public function create(Request $request): Response
+    {
+        $boardForm = $this->createForm(BoardFormType::class);
+        $boardForm->handleRequest($request);
+
+        if ($boardForm->isSubmitted() && $boardForm->isValid())
+        {
+
+            /** @var Board $board */
+            $board = $boardForm->getData();
+            $board
+                ->addOwner($this->getUser())
+                ->setScore(0)
+                ->setUrlTitle($board->getTitle())
+            ;
+
+            // TODO : prevent board dupe
+            $manager = $this->getDoctrine()->getManager();
+            $manager->persist($board);
+            $manager->flush();
+
+            return $this->redirectToRoute('follow', ['urlTitle' => $board->getUrlTitle()]);
+        }
+
+        return $this->render('board/create.html.twig', [
+            'boardForm' => $boardForm->createView()
         ]);
     }
 }

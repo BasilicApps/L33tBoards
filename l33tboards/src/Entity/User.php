@@ -174,6 +174,37 @@ class User implements UserInterface
         return $this->posts;
     }
 
+
+    /**
+     * @return int
+     */
+    public function getNbPosts(): int
+    {
+        return $this->posts->count();
+    }
+
+    /**
+     * @return int
+     */
+    public function getScore(): int
+    {
+        $val = 0;
+        if($this->posts != null){
+            foreach ($this->posts as $post) {
+                $val += $post->getScore();
+            }
+        }
+        return $val;
+    }
+
+    /**
+     * @return int
+     */
+    public function getNbComments(): int
+    {
+        return $this->comments->count();
+    }
+
     public function addPost(Post $post): self
     {
         if (!$this->posts->contains($post)) {
