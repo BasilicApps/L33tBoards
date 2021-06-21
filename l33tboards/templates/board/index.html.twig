@@ -12,30 +12,36 @@
                     <li class="timeline-item bg-white rounded ml-3 p-4 shadow">
                     <div class="timeline-arrow"></div>
                         <h1 class="display-4"><i class="fa fa-book mr-4" style="font-size:50px;" aria-hidden="true"></i><span style="overflow-wrap:anywhere;text-overflow:ellipsis;">{{ board.urlTitle|length > 10 ? board.urlTitle|slice(0, 10) ~ '...' : board.urlTitle }}</span></h1>
-                        <span>
-                            <p class="lead">{% trans %}Dankness{% endtrans %} : {{board.score}}</p>
-                            {% if board in app.user.likedBoards %}
-                                <a href="{{url("noVoteBoard", {'boardUrlTitle': board.urlTitle}) }}" class="btn btn-thumb-liked"><i class="fa fa-thumbs-up mr-1"></i></button>
-                            {% else %}
-                                <a href="{{url("upVoteBoard", {'boardUrlTitle': board.urlTitle}) }}" class="btn btn-thumb"><i class="fa fa-thumbs-up mr-1"></i></button>
+                        <div class="d-flex mt-2">
+                            <div class="mr-auto">
+                                {% if board in app.user.likedBoards %}
+                                    <a href="{{url("noVoteBoard", {'boardUrlTitle': board.urlTitle}) }}" class="btn btn-thumb-liked"><i class="fa fa-thumbs-up mr-2"></i></button>
+                                {% else %}
+                                    <a href="{{url("upVoteBoard", {'boardUrlTitle': board.urlTitle}) }}" class="btn btn-thumb"><i class="fa fa-thumbs-up mr-2"></i></button>
+                                {% endif %}
+                                {% if board in app.user.dislikedBoards %}
+                                    <a href="{{url("noVoteBoard", {'boardUrlTitle': board.urlTitle}) }}" class="btn btn-thumb-unliked"><i class="fa fa-thumbs-down mr-2"></i></button>
+                                {% else %}
+                                    <a href="{{url("downVoteBoard", {'boardUrlTitle': board.urlTitle}) }}" class="btn btn-thumb"><i class="fa fa-thumbs-down mr-2"></i></button>
+                                {% endif %}
+                                {% if board.score < 0 %}
+                                    <span class="badge badge-danger ml-2">{{ board.score }}</span>
+                                {% else %}
+                                    <span class="badge badge-light ml-2">{{ board.score }}</span>
+                                {% endif %}
+                            </div>
+                            {% if app.user != null %}
+                                {% if board in app.user.followedBoards %}
+                                    <a href="{{url("unFollow", {'urlTitle': board.urlTitle}) }}" class="btn btn-danger">
+                                        {% trans %}unfollow{% endtrans %}
+                                    </a>
+                                {% else %}
+                                    <a class="btn btn-primary" href="{{url("follow", {'urlTitle': board.urlTitle}) }}">
+                                        {% trans %}follow{% endtrans %}
+                                    </a>
+                                {% endif %}
                             {% endif %}
-                            {% if board in app.user.dislikedBoards %}
-                                <a href="{{url("noVoteBoard", {'boardUrlTitle': board.urlTitle}) }}" class="btn btn-thumb-unliked"><i class="fa fa-thumbs-down mr-1"></i></button>
-                            {% else %}
-                                <a href="{{url("downVoteBoard", {'boardUrlTitle': board.urlTitle}) }}" class="btn btn-thumb"><i class="fa fa-thumbs-down mr-1"></i></button>
-                            {% endif %}
-                        </span>
-                        {% if app.user != null %} 
-                            {% if board in app.user.followedBoards %}
-                                <a href="{{url("unFollow", {'urlTitle': board.urlTitle}) }}" class="btn btn-danger">
-                                    {% trans %}unfollow{% endtrans %}
-                                </a>
-                            {% else %}
-                                <a class="btn btn-primary" href="{{url("follow", {'urlTitle': board.urlTitle}) }}">
-                                    {% trans %}follow{% endtrans %}
-                                </a>
-                            {% endif %}
-                        {% endif %}
+                        </div>
                     </li>
                 </a>
             {% endfor %}

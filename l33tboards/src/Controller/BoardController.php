@@ -94,6 +94,7 @@ class BoardController extends AbstractController
 
         // Ajout du upvote utilisateur pour le board
         $board->addUserLike($user);
+        $board->setScore($board->getScore() + 1);
         $user->addLikedBoard($board);
 
         // Enregistrement des entités modifiées en BDD
@@ -119,8 +120,9 @@ class BoardController extends AbstractController
             $user->removeLikedBoard($board);
         }
 
-        // Ajout du upvote utilisateur pour le board
+        // Ajout du downvote utilisateur pour le board
         $board->addUserDislike($user);
+        $board->setScore($board->getScore() - 1);
         $user->addDislikedBoard($board);
 
         // Enregistrement des entités modifiées en BDD
@@ -144,10 +146,12 @@ class BoardController extends AbstractController
         if ($board->getUserLikes()->contains($user)) {
             // Initialement upvoted
             $board->removeUserLike($user);
+            $board->setScore($board->getScore() - 1);
             $user->removeLikedBoard($board);
         } else {
             // Initialement downvoted
             $board->removeUserDislike($user);
+            $board->setScore($board->getScore() + 1);
             $user->removeDislikedBoard($board);
         }
 
