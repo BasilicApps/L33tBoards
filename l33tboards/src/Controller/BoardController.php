@@ -25,7 +25,6 @@ class BoardController extends AbstractController
     /**
      * @Route("/boards", name="boards", methods={"GET"})
      */
-
     public function index(): Response
     {
         return $this->render('board/index.html.twig', [
@@ -36,7 +35,6 @@ class BoardController extends AbstractController
     /**
      * @Route("/follow/{urlTitle}", name="follow", methods={"GET"})
      */
-
     public function follow(Request $request, string $urlTitle, EntityManagerInterface $em): Response
     {
         $board = $this->boardRepository->findByUrl($urlTitle)[0];
@@ -57,10 +55,9 @@ class BoardController extends AbstractController
         ]);*/
     }
 
-        /**
+    /**
      * @Route("/unFollow/{urlTitle}", name="unFollow", methods={"GET"})
      */
-
     public function unFollow(Request $request, string $urlTitle, EntityManagerInterface $em): Response
     {
         $board = $this->boardRepository->findByUrl($urlTitle)[0];
@@ -81,12 +78,23 @@ class BoardController extends AbstractController
         ]);*/
     }
 
+    /**
+     * @Route("/upVoteBoard/{boardUrlTitle}", name="upVoteBoard", methods={"GET"})
+     */
     public function upVoteBoard(Request $request, EntityManagerInterface $em, string $boardUrlTitle): Response {
         // Récupération du board et de l'utilisateur connecté
         $board = $this->boardRepository->findByUrl($boardUrlTitle)[0];
         $user = $this->getUser();
 
-        // TODO
+        // On supprime le downvote éventuel de l'utilisateur pour ce même board
+        if ($board->getUserDislikes()->contains($user)) {
+            $board->removeUserDislike($user);
+            $user->removeDislikedBoard($board);
+        }
+
+        // Ajout du upvote utilisateur pour le board
+        $board->addUserLike($user);
+        $user->addLikedBoard($board);
 
         // Enregistrement des entités modifiées en BDD
         $em->persist($board);
@@ -97,12 +105,23 @@ class BoardController extends AbstractController
         return $this->redirect($request->headers->get('referer'));
     }
 
+    /**
+     * @Route("/downVoteBoard/{boardUrlTitle}", name="downVoteBoard", methods={"GET"})
+     */
     public function downVoteBoard(Request $request, EntityManagerInterface $em, string $boardUrlTitle): Response {
         // Récupération du board et de l'utilisateur connecté
         $board = $this->boardRepository->findByUrl($boardUrlTitle)[0];
         $user = $this->getUser();
 
-        // TODO
+        // On supprime le upvote éventuel de l'utilisateur pour ce même board
+        if ($board->getUserLikes()->contains($user)) {
+            $board->removeUserLike($user);
+            $user->removeLikedBoard($board);
+        }
+
+        // Ajout du upvote utilisateur pour le board
+        $board->addUserDislike($user);
+        $user->addDislikedBoard($board);
 
         // Enregistrement des entités modifiées en BDD
         $em->persist($board);
@@ -113,12 +132,24 @@ class BoardController extends AbstractController
         return $this->redirect($request->headers->get('referer'));
     }
 
+    /**
+     * @Route("/noVoteBoard/{boardUrlTitle}", name="noVoteBoard", methods={"GET"})
+     */
     public function noVoteBoard(Request $request, EntityManagerInterface $em, string $boardUrlTitle): Response {
         // Récupération du board et de l'utilisateur connecté
         $board = $this->boardRepository->findByUrl($boardUrlTitle)[0];
         $user = $this->getUser();
 
-        // TODO
+        // Suppression du up/down vote selon s'il s'agissait d'un upvote ou d'un downvote initialement
+        if ($board->getUserLikes()->contains($user)) {
+            // Initialement upvoted
+            $board->removeUserLike($user);
+            $user->removeLikedBoard($board);
+        } else {
+            // Initialement downvoted
+            $board->removeUserDislike($user);
+            $user->removeDislikedBoard($board);
+        }
 
         // Enregistrement des entités modifiées en BDD
         $em->persist($board);
