@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use App\Repository\PostRepository;
+use Doctrine\ORM\EntityManagerInterface;
 
 use App\Form\PostFormType;
 use App\Form\CommentFormType;
@@ -56,7 +57,7 @@ class PostController extends AbstractController
         ]);
     }
 
-        /**
+    /**
      * @Route("/post/{id}", name="showPost")
      */
     public function show(int $id, Request $request): Response
@@ -89,5 +90,93 @@ class PostController extends AbstractController
             'post' => $post,
             'commentForm' => $commentForm->createView()
         ]);
+    }
+
+    /**
+     * @Route("/upvotepost/{postId}", name="upvotepost")
+     */
+    public function upVotePost(Request $request, EntityManagerInterface $em, int $postId) {
+        // Récupération du board et de l'utilisateur connecté
+        $post = $this->postRepository->findById($postId)[0];
+        $user = $this->getUser();
+
+        // On supprime le downvote éventuel de l'utilisateur pour ce même post
+        if ($post->getUserDislikes()->contains($user)) {
+            $post->removeUserDislike($user);
+            $post->setScore($post->getScore() + 1);
+            $user->removeDislikedPost($post);
+        }
+
+        // Ajout du upvote utilisateur pour le post
+        $post->addUserLike($user);
+        $post->setScore($post->getScore() + 1);
+        $user->addLikedPost($post);
+
+        // Enregistrement des entités modifiées en BDD
+        $em->persist($post);
+        $em->persist($user);
+        $em->flush();
+
+        // Redirection auto vers la page précédente
+        return $this->redirect($request->headers->get('referer'));
+    }
+
+    /**
+     * @Route("/downvotepost/{postId}", name="downvotepost")
+     */
+    public function downVotePost(Request $request, EntityManagerInterface $em, int $postId) {
+        // Récupération du board et de l'utilisateur connecté
+        $post = $this->postRepository->findById($postId)[0];
+        $user = $this->getUser();
+
+        // On supprime le upvote éventuel de l'utilisateur pour ce même post
+        if ($post->getUserLikes()->contains($user)) {
+            $post->removeUserLike($user);
+            $post->setScore($post->getScore() - 1);
+            $user->removeLikedPost($post);
+        }
+
+        // Ajout du downvote utilisateur pour le post
+        $post->addUserDislike($user);
+        $post->setScore($post->getScore() - 1);
+        $user->addDislikedPost($post);
+
+        // Enregistrement des entités modifiées en BDD
+        $em->persist($post);
+        $em->persist($user);
+        $em->flush();
+
+        // Redirection auto vers la page précédente
+        return $this->redirect($request->headers->get('referer'));
+    }
+
+    /**
+     * @Route("/novotepost/{postId}", name="novotepost")
+     */
+    public function noVotePost(Request $request, EntityManagerInterface $em, int $postId) {
+        // Récupération du board et de l'utilisateur connecté
+        $post = $this->postRepository->findById($postId)[0];
+        $user = $this->getUser();
+
+        // Suppression du up/down vote selon s'il s'agissait d'un upvote ou d'un downvote initialement (post)
+        if ($post->getUserLikes()->contains($user)) {
+            // Initialement upvoted (post)
+            $post->removeUserLike($user);
+            $post->setScore($post->getScore() - 1);
+            $user->removeLikedPost($post);
+        } else {
+            // Initialement downvoted (post)
+            $post->removeUserDislike($user);
+            $post->setScore($post->getScore() + 1);
+            $user->removeDislikedPost($post);
+        }
+
+        // Enregistrement des entités modifiées en BDD
+        $em->persist($post);
+        $em->persist($user);
+        $em->flush();
+
+        // Redirection auto vers la page précédente
+        return $this->redirect($request->headers->get('referer'));
     }
 }

@@ -56,13 +56,13 @@ class Board
 
     /**
      * @ORM\ManyToMany(targetEntity=User::class, inversedBy="likedBoards")
-     * @ORM\JoinTable(name="BoardsUserLikes")
+     * @ORM\JoinTable(name="board_user_like")
      */
     private $userLikes;
 
     /**
      * @ORM\ManyToMany(targetEntity=User::class, inversedBy="dislikedBoards")
-     * @ORM\JoinTable(name="BoardsUserDislikes")
+     * @ORM\JoinTable(name="board_user_dislike")
      */
     private $userDislikes;
 

@@ -68,6 +68,16 @@ class User implements UserInterface
      */
     private $dislikedBoards;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Post::class, mappedBy="userLikes")
+     */
+    private $likedPosts;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Post::class, mappedBy="userDislikes")
+     */
+    private $dislikedPosts;
+
     public function __construct()
     {
         $this->posts = new ArrayCollection();
@@ -76,6 +86,8 @@ class User implements UserInterface
         $this->comments = new ArrayCollection();
         $this->likedBoards = new ArrayCollection();
         $this->dislikedBoards = new ArrayCollection();
+        $this->likedPosts = new ArrayCollection();
+        $this->dislikedPosts = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -314,6 +326,60 @@ class User implements UserInterface
     {
         if ($this->dislikedBoards->removeElement($dislikedBoard)) {
             $dislikedBoard->removeUserDislike($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Post[]
+     */
+    public function getLikedPosts(): Collection
+    {
+        return $this->likedPosts;
+    }
+
+    public function addLikedPost(Post $likedPost): self
+    {
+        if (!$this->likedPosts->contains($likedPost)) {
+            $this->likedPosts[] = $likedPost;
+            $likedPost->addUserLike($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLikedPost(Post $likedPost): self
+    {
+        if ($this->likedPosts->removeElement($likedPost)) {
+            $likedPost->removeUserLike($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Post[]
+     */
+    public function getDislikedPosts(): Collection
+    {
+        return $this->dislikedPosts;
+    }
+
+    public function addDislikedPost(Post $dislikedPost): self
+    {
+        if (!$this->dislikedPosts->contains($dislikedPost)) {
+            $this->dislikedPosts[] = $dislikedPost;
+            $dislikedPost->addUserDislike($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDislikedPost(Post $dislikedPost): self
+    {
+        if ($this->dislikedPosts->removeElement($dislikedPost)) {
+            $dislikedPost->removeUserDislike($this);
         }
 
         return $this;
