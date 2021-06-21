@@ -89,6 +89,7 @@ class BoardController extends AbstractController
         // On supprime le downvote éventuel de l'utilisateur pour ce même board
         if ($board->getUserDislikes()->contains($user)) {
             $board->removeUserDislike($user);
+            $board->setScore($board->getScore() + 1);
             $user->removeDislikedBoard($board);
         }
 
@@ -117,6 +118,7 @@ class BoardController extends AbstractController
         // On supprime le upvote éventuel de l'utilisateur pour ce même board
         if ($board->getUserLikes()->contains($user)) {
             $board->removeUserLike($user);
+            $board->setScore($board->getScore() - 1);
             $user->removeLikedBoard($board);
         }
 
