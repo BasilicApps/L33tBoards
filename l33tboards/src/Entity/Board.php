@@ -54,11 +54,25 @@ class Board
      */
     private $followingUsers;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=User::class, inversedBy="likedBoards")
+     * @ORM\JoinTable(name="BoardsUserLikes")
+     */
+    private $userLikes;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=User::class, inversedBy="dislikedBoards")
+     * @ORM\JoinTable(name="BoardsUserDislikes")
+     */
+    private $userDislikes;
+
     public function __construct()
     {
         $this->owner = new ArrayCollection();
         $this->posts = new ArrayCollection();
         $this->followingUsers = new ArrayCollection();
+        $this->userLikes = new ArrayCollection();
+        $this->userDislikes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -194,6 +208,54 @@ class Board
         if ($this->followingUsers->removeElement($followingUser)) {
             $followingUser->removeFollowedBoard($this);
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getUserLikes(): Collection
+    {
+        return $this->userLikes;
+    }
+
+    public function addUserLike(User $userLike): self
+    {
+        if (!$this->userLikes->contains($userLike)) {
+            $this->userLikes[] = $userLike;
+        }
+
+        return $this;
+    }
+
+    public function removeUserLike(User $userLike): self
+    {
+        $this->userLikes->removeElement($userLike);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getUserDislikes(): Collection
+    {
+        return $this->userDislikes;
+    }
+
+    public function addUserDislike(User $userDislike): self
+    {
+        if (!$this->userDislikes->contains($userDislike)) {
+            $this->userDislikes[] = $userDislike;
+        }
+
+        return $this;
+    }
+
+    public function removeUserDislike(User $userDislike): self
+    {
+        $this->userDislikes->removeElement($userDislike);
 
         return $this;
     }

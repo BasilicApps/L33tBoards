@@ -58,12 +58,24 @@ class User implements UserInterface
      */
     private $comments;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Board::class, mappedBy="userLikes")
+     */
+    private $likedBoards;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Board::class, mappedBy="userDislikes")
+     */
+    private $dislikedBoards;
+
     public function __construct()
     {
         $this->posts = new ArrayCollection();
         $this->boards = new ArrayCollection();
         $this->followedBoards = new ArrayCollection();
         $this->comments = new ArrayCollection();
+        $this->likedBoards = new ArrayCollection();
+        $this->dislikedBoards = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -248,6 +260,60 @@ class User implements UserInterface
             if ($comment->getAuthor() === $this) {
                 $comment->setAuthor(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Board[]
+     */
+    public function getLikedBoards(): Collection
+    {
+        return $this->likedBoards;
+    }
+
+    public function addLikedBoard(Board $likedBoard): self
+    {
+        if (!$this->likedBoards->contains($likedBoard)) {
+            $this->likedBoards[] = $likedBoard;
+            $likedBoard->addUserLike($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLikedBoard(Board $likedBoard): self
+    {
+        if ($this->likedBoards->removeElement($likedBoard)) {
+            $likedBoard->removeUserLike($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Board[]
+     */
+    public function getDislikedBoards(): Collection
+    {
+        return $this->dislikedBoards;
+    }
+
+    public function addDislikedBoard(Board $dislikedBoard): self
+    {
+        if (!$this->dislikedBoards->contains($dislikedBoard)) {
+            $this->dislikedBoards[] = $dislikedBoard;
+            $dislikedBoard->addUserDislike($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDislikedBoard(Board $dislikedBoard): self
+    {
+        if ($this->dislikedBoards->removeElement($dislikedBoard)) {
+            $dislikedBoard->removeUserDislike($this);
         }
 
         return $this;
