@@ -8,15 +8,29 @@
 <div class="container">
     <div class="card rounded-0 board-header shadow">
         <div class="row mt-4 board-header-content">
-            <div class="col-2 d-flex align-items-center">
+            <div class="col-2 d-flex flex-column justify-content-center align-items-center">
                 <i class="fa fa-book" style="font-size:100px;" aria-hidden="true"></i>
+                <div class="alert alert-dark py-1 px-3 mt-4">{{ board.followingUsers|length }} {% trans %}followers{% endtrans %}</div>
             </div>
             <div class="col-10">
                 <h1>{% trans %}Welcome to{% endtrans %} {{board.title}}! </h1> 
                 <p>/boards/{{board.urlTitle}}</p>
                 <div class="mt-4">
-                    <a href="#" class="btn btn-thumb"><i class="fa fa-thumbs-up mr-2"></i></a>
-                    <a href="#" class="btn btn-thumb"><i class="fa fa-thumbs-down mr-2"></i></a>
+                    {% if board in app.user.likedBoards %}
+                        <a href="{{url("noVoteBoard", {'boardUrlTitle': board.urlTitle}) }}" class="btn btn-thumb-liked"><i class="fa fa-thumbs-up mr-2"></i></a>
+                    {% else %}
+                        <a href="{{url("upVoteBoard", {'boardUrlTitle': board.urlTitle}) }}" class="btn btn-thumb"><i class="fa fa-thumbs-up mr-2"></i></a>
+                    {% endif %}
+                    {% if board in app.user.dislikedBoards %}
+                        <a href="{{url("noVoteBoard", {'boardUrlTitle': board.urlTitle}) }}" class="btn btn-thumb-unliked"><i class="fa fa-thumbs-down mr-2"></i></a>
+                    {% else %}
+                        <a href="{{url("downVoteBoard", {'boardUrlTitle': board.urlTitle}) }}" class="btn btn-thumb"><i class="fa fa-thumbs-down mr-2"></i></a>
+                    {% endif %}
+                    {% if board.score < 0 %}
+                        <span class="badge badge-danger ml-2">{{ board.score }}</span>
+                    {% else %}
+                        <span class="badge badge-light ml-2">{{ board.score }}</span>
+                    {% endif %}
                 </div>
             </div>
         </div>
