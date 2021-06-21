@@ -32,11 +32,11 @@
                             </div>
                             {% if app.user != null %}
                                 {% if board in app.user.followedBoards %}
-                                    <a href="{{url("unFollow", {'urlTitle': board.urlTitle}) }}" class="btn btn-danger">
+                                    <a href="{{url("unFollow", {'boardId': board.id}) }}" class="btn btn-danger">
                                         {% trans %}unfollow{% endtrans %}<span class="badge badge-light ml-2">{{ board.followingUsers|length }}</span>
                                     </a>
                                 {% else %}
-                                    <a class="btn btn-primary" href="{{url("follow", {'urlTitle': board.urlTitle}) }}">
+                                    <a class="btn btn-primary" href="{{url("follow", {'boardId': board.id}) }}">
                                         {% trans %}follow{% endtrans %}<span class="badge badge-light ml-2">{{ board.followingUsers|length }}</span>
                                     </a>
                                 {% endif %}

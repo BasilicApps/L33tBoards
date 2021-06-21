@@ -9,8 +9,19 @@
     <div class="card rounded-0 board-header shadow">
         <div class="row mt-4 board-header-content">
             <div class="col-2 d-flex flex-column justify-content-center align-items-center">
-                <i class="fa fa-book" style="font-size:100px;" aria-hidden="true"></i>
-                <div class="alert alert-dark py-1 px-3 mt-4">{{ board.followingUsers|length }} {% trans %}followers{% endtrans %}</div>
+                <i class="fa fa-book" style="font-size:80px;" aria-hidden="true"></i>
+                <!--<div class="alert alert-dark py-1 px-3 mt-4">{{ board.followingUsers|length }} {% trans %}followers{% endtrans %}</div>-->
+                {% if app.user != null %}
+                    {% if board in app.user.followedBoards %}
+                        <a class="btn btn-danger mt-4" href="{{url("unFollow", {'boardId': board.id}) }}">
+                            {% trans %}unfollow{% endtrans %}<span class="badge badge-light ml-2">{{ board.followingUsers|length }}</span>
+                        </a>
+                    {% else %}
+                        <a class="btn btn-primary mt-4" href="{{url("follow", {'boardId': board.id}) }}">
+                            {% trans %}follow{% endtrans %}<span class="badge badge-light ml-2">{{ board.followingUsers|length }}</span>
+                        </a>
+                    {% endif %}
+                {% endif %}
             </div>
             <div class="col-10">
                 <h1>{% trans %}Welcome to{% endtrans %} {{board.title}}! </h1> 

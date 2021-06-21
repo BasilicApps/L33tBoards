@@ -33,11 +33,11 @@ class BoardController extends AbstractController
     }
 
     /**
-     * @Route("/follow/{urlTitle}", name="follow", methods={"GET"})
+     * @Route("/follow/{boardId}", name="follow", methods={"GET"})
      */
-    public function follow(Request $request, string $urlTitle, EntityManagerInterface $em): Response
+    public function follow(Request $request, string $boardId, EntityManagerInterface $em): Response
     {
-        $board = $this->boardRepository->findByUrl($urlTitle)[0];
+        $board = $this->boardRepository->findById($boardId)[0];
 
         $this->getUser()->addFollowedBoard($board);
         $board->addFollowingUser($this->getUser());
@@ -56,11 +56,11 @@ class BoardController extends AbstractController
     }
 
     /**
-     * @Route("/unFollow/{urlTitle}", name="unFollow", methods={"GET"})
+     * @Route("/unFollow/{boardId}", name="unFollow", methods={"GET"})
      */
-    public function unFollow(Request $request, string $urlTitle, EntityManagerInterface $em): Response
+    public function unFollow(Request $request, string $boardId, EntityManagerInterface $em): Response
     {
-        $board = $this->boardRepository->findByUrl($urlTitle)[0];
+        $board = $this->boardRepository->findById($boardId)[0];
 
         $this->getUser()->removeFollowedBoard($board);
         $board->removeFollowingUser($this->getUser());
