@@ -26,15 +26,17 @@
                 <h1>{% trans %}Welcome to{% endtrans %} {{board.title}}! </h1> 
                 <p>/boards/{{board.urlTitle}}</p>
                 <div class="mt-4">
-                    {% if board in app.user.likedBoards %}
-                        <a href="{{url("novoteboard", {'boardId': board.id}) }}" class="btn btn-thumb-liked"><i class="fa fa-thumbs-up mr-2"></i></a>
-                    {% else %}
-                        <a href="{{url("upvoteboard", {'boardId': board.id}) }}" class="btn btn-thumb"><i class="fa fa-thumbs-up mr-2"></i></a>
-                    {% endif %}
-                    {% if board in app.user.dislikedBoards %}
-                        <a href="{{url("novoteboard", {'boardId': board.id}) }}" class="btn btn-thumb-unliked"><i class="fa fa-thumbs-down mr-2"></i></a>
-                    {% else %}
-                        <a href="{{url("downvoteboard", {'boardId': board.id}) }}" class="btn btn-thumb"><i class="fa fa-thumbs-down mr-2"></i></a>
+                    {% if app.user != null %}
+                        {% if board in app.user.likedBoards %}
+                            <a href="{{url("novoteboard", {'boardId': board.id}) }}" class="btn btn-thumb-liked"><i class="fa fa-thumbs-up mr-2"></i></a>
+                        {% else %}
+                            <a href="{{url("upvoteboard", {'boardId': board.id}) }}" class="btn btn-thumb"><i class="fa fa-thumbs-up mr-2"></i></a>
+                        {% endif %}
+                        {% if board in app.user.dislikedBoards %}
+                            <a href="{{url("novoteboard", {'boardId': board.id}) }}" class="btn btn-thumb-unliked"><i class="fa fa-thumbs-down mr-2"></i></a>
+                        {% else %}
+                            <a href="{{url("downvoteboard", {'boardId': board.id}) }}" class="btn btn-thumb"><i class="fa fa-thumbs-down mr-2"></i></a>
+                        {% endif %}
                     {% endif %}
                     {% if board.score < 0 %}
                         <span class="badge badge-danger ml-2">{{ board.score }}</span>
@@ -73,15 +75,17 @@
                         </div>
                     </a>
                     <div class="card d-flex flex-row align-items-center mt-4">
-                        {% if post in app.user.likedPosts %}
-                            <a href="{{url("novotepost", {'postId': post.id}) }}" class="btn btn-thumb-liked"><i class="fa fa-thumbs-up mr-2"></i></a>
-                        {% else %}
-                            <a href="{{url("upvotepost", {'postId': post.id}) }}" class="btn btn-thumb"><i class="fa fa-thumbs-up mr-2"></i></a>
-                        {% endif %}
-                        {% if post in app.user.dislikedPosts %}
-                            <a href="{{url("novotepost", {'postId': post.id}) }}" class="btn btn-thumb-unliked"><i class="fa fa-thumbs-down mr-2"></i></a>
-                        {% else %}
-                            <a href="{{url("downvotepost", {'postId': post.id}) }}" class="btn btn-thumb"><i class="fa fa-thumbs-down mr-2"></i></a>
+                        {% if app.user != null %}
+                            {% if post in app.user.likedPosts %}
+                                <a href="{{url("novotepost", {'postId': post.id}) }}" class="btn btn-thumb-liked"><i class="fa fa-thumbs-up mr-2"></i></a>
+                            {% else %}
+                                <a href="{{url("upvotepost", {'postId': post.id}) }}" class="btn btn-thumb"><i class="fa fa-thumbs-up mr-2"></i></a>
+                            {% endif %}
+                            {% if post in app.user.dislikedPosts %}
+                                <a href="{{url("novotepost", {'postId': post.id}) }}" class="btn btn-thumb-unliked"><i class="fa fa-thumbs-down mr-2"></i></a>
+                            {% else %}
+                                <a href="{{url("downvotepost", {'postId': post.id}) }}" class="btn btn-thumb"><i class="fa fa-thumbs-down mr-2"></i></a>
+                            {% endif %}
                         {% endif %}
                         {% if post.score < 0 %}
                             <span class="badge badge-danger ml-2">{{ post.score }}</span>

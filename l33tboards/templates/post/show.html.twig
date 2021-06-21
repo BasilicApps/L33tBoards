@@ -35,15 +35,17 @@
                         </div>
                     </div>
                     <div>
-                        {% if post in app.user.likedPosts %}
-                            <a href="{{url("novotepost", {'postId': post.id}) }}" class="btn btn-thumb-liked"><i class="fa fa-thumbs-up mr-2"></i></a>
-                        {% else %}
-                            <a href="{{url("upvotepost", {'postId': post.id}) }}" class="btn btn-thumb"><i class="fa fa-thumbs-up mr-2"></i></a>
-                        {% endif %}
-                        {% if post in app.user.dislikedPosts %}
-                            <a href="{{url("novotepost", {'postId': post.id}) }}" class="btn btn-thumb-unliked"><i class="fa fa-thumbs-down mr-2"></i></a>
-                        {% else %}
-                            <a href="{{url("downvotepost", {'postId': post.id}) }}" class="btn btn-thumb"><i class="fa fa-thumbs-down mr-2"></i></a>
+                        {% if app.user != null %}
+                            {% if post in app.user.likedPosts %}
+                                <a href="{{url("novotepost", {'postId': post.id}) }}" class="btn btn-thumb-liked"><i class="fa fa-thumbs-up mr-2"></i></a>
+                            {% else %}
+                                <a href="{{url("upvotepost", {'postId': post.id}) }}" class="btn btn-thumb"><i class="fa fa-thumbs-up mr-2"></i></a>
+                            {% endif %}
+                            {% if post in app.user.dislikedPosts %}
+                                <a href="{{url("novotepost", {'postId': post.id}) }}" class="btn btn-thumb-unliked"><i class="fa fa-thumbs-down mr-2"></i></a>
+                            {% else %}
+                                <a href="{{url("downvotepost", {'postId': post.id}) }}" class="btn btn-thumb"><i class="fa fa-thumbs-down mr-2"></i></a>
+                            {% endif %}
                         {% endif %}
                         {% if post.score < 0 %}
                             <span class="badge badge-danger ml-2">{{ post.score }}</span>
