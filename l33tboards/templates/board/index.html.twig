@@ -15,14 +15,14 @@
                         <div class="d-flex mt-2">
                             <div class="mr-auto">
                                 {% if board in app.user.likedBoards %}
-                                    <a href="{{url("noVoteBoard", {'boardUrlTitle': board.urlTitle}) }}" class="btn btn-thumb-liked"><i class="fa fa-thumbs-up mr-2"></i></a>
+                                    <a href="{{url("novoteboard", {'boardId': board.id}) }}" class="btn btn-thumb-liked"><i class="fa fa-thumbs-up mr-2"></i></a>
                                 {% else %}
-                                    <a href="{{url("upVoteBoard", {'boardUrlTitle': board.urlTitle}) }}" class="btn btn-thumb"><i class="fa fa-thumbs-up mr-2"></i></a>
+                                    <a href="{{url("upvoteboard", {'boardId': board.id}) }}" class="btn btn-thumb"><i class="fa fa-thumbs-up mr-2"></i></a>
                                 {% endif %}
                                 {% if board in app.user.dislikedBoards %}
-                                    <a href="{{url("noVoteBoard", {'boardUrlTitle': board.urlTitle}) }}" class="btn btn-thumb-unliked"><i class="fa fa-thumbs-down mr-2"></i></a>
+                                    <a href="{{url("novoteboard", {'boardId': board.id}) }}" class="btn btn-thumb-unliked"><i class="fa fa-thumbs-down mr-2"></i></a>
                                 {% else %}
-                                    <a href="{{url("downVoteBoard", {'boardUrlTitle': board.urlTitle}) }}" class="btn btn-thumb"><i class="fa fa-thumbs-down mr-2"></i></a>
+                                    <a href="{{url("downvoteboard", {'boardId': board.id}) }}" class="btn btn-thumb"><i class="fa fa-thumbs-down mr-2"></i></a>
                                 {% endif %}
                                 {% if board.score < 0 %}
                                     <span class="badge badge-danger ml-2">{{ board.score }}</span>

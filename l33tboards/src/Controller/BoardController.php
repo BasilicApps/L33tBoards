@@ -79,11 +79,11 @@ class BoardController extends AbstractController
     }
 
     /**
-     * @Route("/upVoteBoard/{boardUrlTitle}", name="upVoteBoard", methods={"GET"})
+     * @Route("/boards/upvote/{boardId}", name="upvoteboard", methods={"GET"})
      */
-    public function upVoteBoard(Request $request, EntityManagerInterface $em, string $boardUrlTitle): Response {
+    public function upVoteBoard(Request $request, EntityManagerInterface $em, string $boardId): Response {
         // Récupération du board et de l'utilisateur connecté
-        $board = $this->boardRepository->findByUrl($boardUrlTitle)[0];
+        $board = $this->boardRepository->findById($boardId)[0];
         $user = $this->getUser();
 
         // On supprime le downvote éventuel de l'utilisateur pour ce même board
@@ -108,11 +108,11 @@ class BoardController extends AbstractController
     }
 
     /**
-     * @Route("/downVoteBoard/{boardUrlTitle}", name="downVoteBoard", methods={"GET"})
+     * @Route("/board/downvote/{boardId}", name="downvoteboard", methods={"GET"})
      */
-    public function downVoteBoard(Request $request, EntityManagerInterface $em, string $boardUrlTitle): Response {
+    public function downVoteBoard(Request $request, EntityManagerInterface $em, string $boardId): Response {
         // Récupération du board et de l'utilisateur connecté
-        $board = $this->boardRepository->findByUrl($boardUrlTitle)[0];
+        $board = $this->boardRepository->findById($boardId)[0];
         $user = $this->getUser();
 
         // On supprime le upvote éventuel de l'utilisateur pour ce même board
@@ -137,11 +137,11 @@ class BoardController extends AbstractController
     }
 
     /**
-     * @Route("/noVoteBoard/{boardUrlTitle}", name="noVoteBoard", methods={"GET"})
+     * @Route("/board/novote/{boardId}", name="novoteboard", methods={"GET"})
      */
-    public function noVoteBoard(Request $request, EntityManagerInterface $em, string $boardUrlTitle): Response {
+    public function noVoteBoard(Request $request, EntityManagerInterface $em, string $boardId): Response {
         // Récupération du board et de l'utilisateur connecté
-        $board = $this->boardRepository->findByUrl($boardUrlTitle)[0];
+        $board = $this->boardRepository->findById($boardId)[0];
         $user = $this->getUser();
 
         // Suppression du up/down vote selon s'il s'agissait d'un upvote ou d'un downvote initialement

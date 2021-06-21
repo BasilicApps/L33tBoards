@@ -43,6 +43,17 @@ class BoardRepository extends ServiceEntityRepository
         ;
     }
 
+    public function findById($value)
+    {
+        return $this->createQueryBuilder('b')
+            ->andWhere('b.id = :val')
+            ->setParameter('val', $value)
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     /*
     public function findOneBySomeField($value): ?Board
     {
