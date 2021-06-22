@@ -51,10 +51,10 @@ class BoardController extends AbstractController
         dump($this->getUser());
         dump($board);
 
-        return $this->redirect($request->headers->get('referer'));
-        /*return $this->render('board/show.html.twig', [
+        //return $this->redirect($request->headers->get('referer'));
+        return $this->render('board/show.html.twig', [
             'board' => $board
-        ]);*/
+        ]);
     }
 
     /**
@@ -204,7 +204,7 @@ class BoardController extends AbstractController
             $manager->persist($board);
             $manager->flush();
 
-            return $this->redirectToRoute('follow', ['urlTitle' => $board->getUrlTitle()]);
+            return $this->redirectToRoute('follow', ['boardId' => $board->getId()]);
         }
 
         return $this->render('board/create.html.twig', [
