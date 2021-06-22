@@ -4,75 +4,88 @@
 
 {% block body %}
 
-<div class="card board-header">
-    <div class="row mt-4 board-header-content">
-        <div class="col-2">
-            <i class="fa fa-sticky-note" style="font-size:50px;" aria-hidden="true"></i>
-        </div>
-        <div class="col-10">
-            <h1>{{post.title}}</h2>
-        </div>
-
-        </div>
-    </div>
-</div>
-
 <div class="container">
+
+    <div class="card rounded-0 board-header shadow">
+        <div class="row mt-4 board-header-content">
+            <div class="col-2 d-flex flex-column justify-content-center align-items-center">
+                <i class="fa fa-sticky-note" style="font-size:50px;" aria-hidden="true"></i>
+            </div>
+            <div class="col-10">
+                <h1>{{post.title}}</h2>
+            </div>
+        </div>
+    </div>
+
+
+
     <div class="row mt-4">
-        <div class="row mt-4">
+        <div class="col-8">
             <ul class="timeline">
-                    <li class="timeline-item bg-white rounded ml-3 p-4 shadow">
-                        <div class="timeline-arrow"></div>
-                            <h2 class="post-title mb-0">
-                                <span class="mr-2">{% trans %}posted{% endtrans %} <span class="post-title-highlight">{{post.createdAt |date}}</span> {% trans %}by{% endtrans %}</span>
-                                <img src="{{ asset('/img/default/user_default_24.png') }}" class="rounded-circle shadow mr-2" alt="...">
-                                <span><a href="/u/{{post.author.username}}" class="text-dark">{{post.author.username}}</a></span>
-                                
-                            </h2>
-                        <div class="post-content">
-                            
-                            <div class="text-center">
-                                {{post.content}}
-                            </div>
+                <li class="timeline-item bg-white rounded ml-3 p-4 shadow">
+                    <div class="timeline-arrow"></div>
+                    <h2 class="post-title mb-0">
+                        <span class="mr-2">{% trans %}posted{% endtrans %} <span class="post-title-highlight">{{post.createdAt |date}}</span> {% trans %}by{% endtrans %}</span>
+                        <img src="{{ asset('/img/default/user_default_24.png') }}" class="rounded-circle shadow mr-2" alt="...">
+                        <span><a href="/u/{{post.author.username}}" class="text-dark">{{post.author.username}}</a></span>
+                    </h2>
+                    <div class="post-content">
+                        <div class="text-center my-4">
+                            {{post.content}}
                         </div>
-                        <button type="button" class="btn btn-primary"><i class="fa fa-thumbs-up mr-1"></i></button>
-                        <button type="button" class="btn btn-primary"><i class="fa fa-thumbs-down mr-1"></i></button>
-                        <span class="lead">{% trans %}Dankness{% endtrans %} : {{post.score}}</span>
-                    </li>
-            </ul>
-        </div>
-    </div>
-    <hr data-content="{% trans %}COMMENTS{% endtrans %}" class="hr-text">
-    <div class="row mt-4">
-        <div class="row mt-4">
-            {% if app.user %}
-                <div class="container card m-4 p-4">
-                    {{ form_start(commentForm) }}
-                        {{ form_row(commentForm.content) }}
-                        <button class="btn btn-primary mt-4" type="submit">
-                            {% trans %}Post comment{% endtrans %}
-                        </button>
-                    {{ form_end(commentForm) }}
-                </div>
-            {% endif %}
-            <ul class="timeline">
-                {% for comment in post.comments|reverse %}
-                    <li class="timeline-item bg-white rounded ml-3 p-4 shadow">
-                        <div class="timeline-arrow"></div>
-                            <span class="mx-2">{% trans %}posted{% endtrans %} 
-                                <span class="post-title-highlight">{{comment.createdAt |date}}</span> {% trans %}by{% endtrans %} <a href="/u/{{comment.author.username}}" class="text-dark">{{comment.author.username}}</a>
-                            </span>
-                            <img src="{{ asset('/img/default/user_default_24.png') }}" class="rounded-circle shadow mr-2" alt="...">
+                    </div>
+                    <div>
+                        {% if app.user != null %}
+                            {% if post in app.user.likedPosts %}
+                                <a href="{{url("novotepost", {'postId': post.id}) }}" class="btn btn-thumb-liked"><i class="fa fa-thumbs-up mr-2"></i></a>
+                            {% else %}
+                                <a href="{{url("upvotepost", {'postId': post.id}) }}" class="btn btn-thumb"><i class="fa fa-thumbs-up mr-2"></i></a>
+                            {% endif %}
+                            {% if post in app.user.dislikedPosts %}
+                                <a href="{{url("novotepost", {'postId': post.id}) }}" class="btn btn-thumb-unliked"><i class="fa fa-thumbs-down mr-2"></i></a>
+                            {% else %}
+                                <a href="{{url("downvotepost", {'postId': post.id}) }}" class="btn btn-thumb"><i class="fa fa-thumbs-down mr-2"></i></a>
+                            {% endif %}
+                        {% endif %}
+                        {% if post.score < 0 %}
+                            <span class="badge badge-danger ml-2">{{ post.score }}</span>
+                        {% else %}
+                            <span class="badge badge-light ml-2">{{ post.score }}</span>
+                        {% endif %}
+                    </div>
+                </li>
+            </ul><br>
+            <hr data-content="{% trans %}COMMENTS{% endtrans %}" class="hr-text">
+            <div class="my-4">
+                {% if app.user %}
+                    <div class="container card m-4 p-4">
+                        {{ form_start(commentForm) }}
+                            {{ form_row(commentForm.content) }}
+                            <button class="btn btn-primary mt-4" type="submit">
+                                {% trans %}Post comment{% endtrans %}
+                            </button>
+                        {{ form_end(commentForm) }}
+                    </div>
+                {% endif %}
+                <ul class="timeline">
+                    {% for comment in post.comments|reverse %}
+                        <li class="timeline-item bg-white rounded ml-3 p-4 shadow">
+                            <div class="timeline-arrow"></div>
+                            <h2 class="post-title mb-0">
+                                <span class="mr-2">{% trans %}posted{% endtrans %} <span class="post-title-highlight">{{comment.createdAt |date}}</span> {% trans %}by{% endtrans %}</span>
+                                <img src="{{ asset('/img/default/user_default_24.png') }}" class="rounded-circle shadow mr-2" alt="...">
+                                <span><a href="/u/{{comment.author.username}}" class="text-dark">{{comment.author.username}}</a></span>
                             </h2>
-                                <div class="post-content">
-                            <div class="text-center">
-                                {{comment.content}}
+                            <div class="post-content">
+                                <div class="text-center my-4">
+                                    {{comment.content}}
+                                </div>
                             </div>
-                    </li>
-                {% endfor %}
-            </ul>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
-    </div>
         <div class="col-4" style="margin-top:20px">
             <!-- Right part: TOP + infos + footer -->
             {% include 'layout/footer.html.twig' %}

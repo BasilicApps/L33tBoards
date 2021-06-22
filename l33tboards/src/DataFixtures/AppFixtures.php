@@ -31,7 +31,8 @@ class AppFixtures extends Fixture
                 $board->setTitle($faker->sentence(3));
                 $board->setUrlTitle($board->getTitle());
                 $board->setVisibility(true);
-                $board->setScore(0);
+                //$board->setScore(0);
+                $board->setScore($faker->numberBetween(-1000, 9999)); // Pour tester les badges avec une valeur + élevée
                 $board->addOwner($user);
 
                 $manager->persist($board);
@@ -41,7 +42,8 @@ class AppFixtures extends Fixture
                     $post = new Post();
                     $post->setTitle($faker->sentence());
                     $post->setContent($faker->paragraph());
-                    $post->setScore(0);
+                    //$post->setScore(0);
+                    $post->setScore($faker->numberBetween(-1000, 9999)); // Pour tester les badges avec une valeur + élevée
                     $post->setAuthor($user);
                     $post->setBoard($board);
                     $post->setCreatedAt($faker->dateTime());

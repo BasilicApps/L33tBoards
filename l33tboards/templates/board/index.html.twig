@@ -18,23 +18,39 @@
                 <a style="color: #000000; text-decoration: none;" href="{{ url("showBoard", {'urlTitle': board.urlTitle}) }}">
                     <li class="timeline-item bg-white rounded ml-3 p-4 shadow">
                     <div class="timeline-arrow"></div>
-                        <h1 class="display-4"><i class="fa fa-book mr-4" style="font-size:50px;" aria-hidden="true"></i><span style="overflow-wrap:anywhere;text-overflow:ellipsis;">{{ board.title|length > 10 ? board.title|slice(0, 10) ~ '...' : board.title }}</span></h1>
-                        <span>
-                            <p class="lead">{% trans %}Dankness{% endtrans %} : {{board.score}}</p>
-                            <a href="#" class="btn btn-thumb"><i class="fa fa-thumbs-up mr-1"></i></button>
-                            <a href="#" class="btn btn-thumb"><i class="fa fa-thumbs-down mr-1"></i></button>
-                        </span>
-                        {% if app.user != null %} 
-                            {% if board in app.user.followedBoards %}
-                                <a href="{{url("unFollow", {'urlTitle': board.urlTitle}) }}" class="btn btn-danger">
-                                    {% trans %}unfollow{% endtrans %}
-                                </a>
-                            {% else %}
-                                <a class="btn btn-primary" href="{{url("follow", {'urlTitle': board.urlTitle}) }}">
-                                    {% trans %}follow{% endtrans %}
-                                </a>
+                        <h1 class="display-4"><i class="fa fa-book mr-4" style="font-size:50px;" aria-hidden="true"></i><span style="overflow-wrap:anywhere;text-overflow:ellipsis;">{{ board.urlTitle|length > 10 ? board.urlTitle|slice(0, 10) ~ '...' : board.urlTitle }}</span></h1>
+                        <div class="d-flex mt-2">
+                            <div class="mr-auto">
+                                {% if app.user != null %}
+                                    {% if board in app.user.likedBoards %}
+                                        <a href="{{url("novoteboard", {'boardId': board.id}) }}" class="btn btn-thumb-liked"><i class="fa fa-thumbs-up mr-2"></i></a>
+                                    {% else %}
+                                        <a href="{{url("upvoteboard", {'boardId': board.id}) }}" class="btn btn-thumb"><i class="fa fa-thumbs-up mr-2"></i></a>
+                                    {% endif %}
+                                    {% if board in app.user.dislikedBoards %}
+                                        <a href="{{url("novoteboard", {'boardId': board.id}) }}" class="btn btn-thumb-unliked"><i class="fa fa-thumbs-down mr-2"></i></a>
+                                    {% else %}
+                                        <a href="{{url("downvoteboard", {'boardId': board.id}) }}" class="btn btn-thumb"><i class="fa fa-thumbs-down mr-2"></i></a>
+                                    {% endif %}
+                                {% endif %}
+                                {% if board.score < 0 %}
+                                    <span class="badge badge-danger ml-2">{{ board.score }}</span>
+                                {% else %}
+                                    <span class="badge badge-light ml-2">{{ board.score }}</span>
+                                {% endif %}
+                            </div>
+                            {% if app.user != null %}
+                                {% if board in app.user.followedBoards %}
+                                    <a href="{{url("unFollow", {'boardId': board.id}) }}" class="btn btn-danger">
+                                        {% trans %}unfollow{% endtrans %}<span class="badge badge-light ml-2">{{ board.followingUsers|length }}</span>
+                                    </a>
+                                {% else %}
+                                    <a class="btn btn-primary" href="{{url("follow", {'boardId': board.id}) }}">
+                                        {% trans %}follow{% endtrans %}<span class="badge badge-light ml-2">{{ board.followingUsers|length }}</span>
+                                    </a>
+                                {% endif %}
                             {% endif %}
-                        {% endif %}
+                        </div>
                     </li>
                 </a>
             {% endfor %}

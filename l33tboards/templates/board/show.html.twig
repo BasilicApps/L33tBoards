@@ -4,19 +4,45 @@
 
 {% block body %}
 
-
 <div class="container">
     <div class="card rounded-0 board-header shadow">
         <div class="row mt-4 board-header-content">
-            <div class="col-2 d-flex align-items-center">
-                <i class="fa fa-book" style="font-size:100px;" aria-hidden="true"></i>
+            <div class="col-2 d-flex flex-column justify-content-center align-items-center">
+                <i class="fa fa-book" style="font-size:80px;" aria-hidden="true"></i>
+                <!--<div class="alert alert-dark py-1 px-3 mt-4">{{ board.followingUsers|length }} {% trans %}followers{% endtrans %}</div>-->
+                {% if app.user != null %}
+                    {% if board in app.user.followedBoards %}
+                        <a class="btn btn-danger mt-4" href="{{url("unFollow", {'boardId': board.id}) }}">
+                            {% trans %}unfollow{% endtrans %}<span class="badge badge-light ml-2">{{ board.followingUsers|length }}</span>
+                        </a>
+                    {% else %}
+                        <a class="btn btn-primary mt-4" href="{{url("follow", {'boardId': board.id}) }}">
+                            {% trans %}follow{% endtrans %}<span class="badge badge-light ml-2">{{ board.followingUsers|length }}</span>
+                        </a>
+                    {% endif %}
+                {% endif %}
             </div>
             <div class="col-10">
                 <h1>{% trans %}Welcome to{% endtrans %} {{board.title}}! </h1> 
                 <p>/boards/{{board.urlTitle}}</p>
                 <div class="mt-4">
-                    <a href="#" class="btn btn-thumb"><i class="fa fa-thumbs-up mr-2"></i></a>
-                    <a href="#" class="btn btn-thumb"><i class="fa fa-thumbs-down mr-2"></i></a>
+                    {% if app.user != null %}
+                        {% if board in app.user.likedBoards %}
+                            <a href="{{url("novoteboard", {'boardId': board.id}) }}" class="btn btn-thumb-liked"><i class="fa fa-thumbs-up mr-2"></i></a>
+                        {% else %}
+                            <a href="{{url("upvoteboard", {'boardId': board.id}) }}" class="btn btn-thumb"><i class="fa fa-thumbs-up mr-2"></i></a>
+                        {% endif %}
+                        {% if board in app.user.dislikedBoards %}
+                            <a href="{{url("novoteboard", {'boardId': board.id}) }}" class="btn btn-thumb-unliked"><i class="fa fa-thumbs-down mr-2"></i></a>
+                        {% else %}
+                            <a href="{{url("downvoteboard", {'boardId': board.id}) }}" class="btn btn-thumb"><i class="fa fa-thumbs-down mr-2"></i></a>
+                        {% endif %}
+                    {% endif %}
+                    {% if board.score < 0 %}
+                        <span class="badge badge-danger ml-2">{{ board.score }}</span>
+                    {% else %}
+                        <span class="badge badge-light ml-2">{{ board.score }}</span>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -50,27 +76,41 @@
     <div class="row mt-4">
         <ul class="timeline">
             {% for post in board.posts|reverse %} <!-- gros cerveau : les plus récent avant :weSmart: -->
-            <li class="timeline-item bg-white rounded ml-3 p-4 shadow">
-                <div class="timeline-arrow"></div>
-                <h2 class="post-title mb-0">
-                    <span class="mr-2">{% trans %}posted{% endtrans %} <span class="post-title-highlight">{{post.createdAt |date}}</span> {% trans %}by{% endtrans %}</span>
-                    <img src="{{ asset('/img/default/user_default_24.png') }}" class="rounded-circle shadow mr-2" alt="...">
-                    <span><a href="/u/{{post.author.username}}" class="text-dark">{{post.author.username}}</a></span>
-                </h2>
-                <a style="color: #000000; text-decoration: none;" href="{{ url("showPost", {'id': post.id}) }}">
-                    <div class="post-content">
-                        <h2 class="h6 my-4 post-content-title">{{post.title}}</h2>
-                        <div class="text-center">
-                            {{post.content}}
+                <li class="timeline-item bg-white rounded ml-3 p-4 shadow">
+                    <div class="timeline-arrow"></div>
+                    <h2 class="post-title mb-0">
+                        <span class="mr-2">{% trans %}posted{% endtrans %} <span class="post-title-highlight">{{post.createdAt |date}}</span> {% trans %}by{% endtrans %}</span>
+                        <img src="{{ asset('/img/default/user_default_24.png') }}" class="rounded-circle shadow mr-2" alt="...">
+                        <span><a href="/u/{{post.author.username}}" class="text-dark">{{post.author.username}}</a></span>
+                    </h2>
+                    <a style="color: #000000; text-decoration: none;" href="{{ url("showPost", {'id': post.id}) }}">
+                        <div class="post-content">
+                            <h2 class="h6 my-4 post-content-title">{{post.title}}</h2>
+                            <div class="text-center">
+                                {{post.content}}
+                            </div>
                         </div>
+                    </a>
+                    <div class="card d-flex flex-row align-items-center mt-4">
+                        {% if app.user != null %}
+                            {% if post in app.user.likedPosts %}
+                                <a href="{{url("novotepost", {'postId': post.id}) }}" class="btn btn-thumb-liked"><i class="fa fa-thumbs-up mr-2"></i></a>
+                            {% else %}
+                                <a href="{{url("upvotepost", {'postId': post.id}) }}" class="btn btn-thumb"><i class="fa fa-thumbs-up mr-2"></i></a>
+                            {% endif %}
+                            {% if post in app.user.dislikedPosts %}
+                                <a href="{{url("novotepost", {'postId': post.id}) }}" class="btn btn-thumb-unliked"><i class="fa fa-thumbs-down mr-2"></i></a>
+                            {% else %}
+                                <a href="{{url("downvotepost", {'postId': post.id}) }}" class="btn btn-thumb"><i class="fa fa-thumbs-down mr-2"></i></a>
+                            {% endif %}
+                        {% endif %}
+                        {% if post.score < 0 %}
+                            <span class="badge badge-danger ml-2">{{ post.score }}</span>
+                        {% else %}
+                            <span class="badge badge-light ml-2">{{ post.score }}</span>
+                        {% endif %}
                     </div>
-                </a>
-                <div class="card d-flex flex-row align-items-center mt-4">
-                    <a href="#" class="btn btn-thumb"><i class="fa fa-thumbs-up mr-2"></i></a>
-                    <a href="#" class="btn btn-thumb"><i class="fa fa-thumbs-down mr-2"></i></a>
-                    <span class="lead">{% trans %}Dankness{% endtrans %} : {{post.score}}</span>
-                </div>
-            </li>
+                </li>
             {% endfor %}
         </ul>
     </div>
